@@ -9,9 +9,9 @@ class QuizList extends React.Component {
     const { quizzes } = this.props
 
     return (
-      <div>
+      <div className="quizList">
         {quizzes.map(quiz =>
-          <Quiz key={quiz.id} question={quiz.question} />)
+          <Quiz key={quiz._id} question={quiz.question} />)
         }
       </div>
     )

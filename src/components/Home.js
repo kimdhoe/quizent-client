@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import QuizList from './QuizList'
-import { fetchQuizzes } from '../actions/quiz'
+import Timeline from './Timeline'
+import { fetchQuizzes, createQuiz } from '../actions/quiz'
 
 class Home extends React.Component {
   static propTypes = { isUserLoggedIn: React.PropTypes.bool.isRequired
@@ -16,19 +16,30 @@ class Home extends React.Component {
   }
 
   render () {
-    if (!this.props.isUserLoggedIn)
+    const { isUserLoggedIn, isFetching, quizzes, createQuiz } = this.props
+
+    if (!isUserLoggedIn)
       return (
         <div>
           <p>Login required.</p>
         </div>
       )
 
-    return <QuizList quizzes={this.props.quizzes} />
+    return (
+      <Timeline
+        quizzes={quizzes}
+        isFetching={isFetching}
+        createQuiz={createQuiz}
+      />
+    )
   }
 }
 
-const mapStateToProps = ({ isUserLoggedIn, quizzes }) => (
-  { isUserLoggedIn, quizzes: [] }
+const mapStateToProps = ({ isUserLoggedIn, isFetching, quizzes }) => (
+  { isUserLoggedIn
+  , isFetching
+  , quizzes
+  }
 )
 
-export default connect(mapStateToProps, { fetchQuizzes })(Home)
+export default connect(mapStateToProps, { fetchQuizzes, createQuiz })(Home)

@@ -1,7 +1,7 @@
 import React    from 'react'
 import { Link } from 'react-router'
 
-const Navigation = ({ isUserLoggedIn, username, logout }) => {
+const Navigation = ({ isUserLoggedIn, isFetching, username, logout }) => {
   const onClick = e => {
     e.preventDefault()
     logout()
@@ -22,6 +22,9 @@ const Navigation = ({ isUserLoggedIn, username, logout }) => {
       <div className="container-fluid">
         <div className="navbar-header">
           <Link to="/" className="navbar-brand">Quizent</Link>
+          {isFetching &&
+            <span>loading...</span>
+          }
         </div>
 
         <div className="coljapse navbar-collapse">

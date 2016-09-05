@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 import config from '../config'
-import { POST_NEW_QUIZ
-       , SUCCESS_NEW_QUIZ } from '../constants'
+import { FETCHING
+       , DONE_FETCHING
+       , RECEIVE_QUIZ } from '../constants'
 
 const requestQuizzes = () => (
   { type: 'REQUEST_QUIZZES' }
@@ -27,28 +28,32 @@ export const fetchQuizzes = () => dispatch => {
     })
 }
 
-const postNewQuiz = quiz => (
-  { type: POST_NEW_QUIZ
+const fetching = () => (
+  { type: FETCHING }
+)
+
+const receiveQuiz = quiz => (
+  { type: RECEIVE_QUIZ
   , quiz
   }
 )
 
-const successNewQuiz = quiz => (
-  { type: SUCCESS_NEW_QUIZ
-  , quiz
-  }
+const doneFetching = () => (
+  { type: DONE_FETCHING }
 )
 
-export const createNewQuiz = quiz => dispatch => {
-  dispatch(postNewQuiz)
+export const createQuiz = quiz => dispatch => {
+  dispatch(fetching())
 
-  axios
+  return axios
     .post(config.api + '/api/quizzes', quiz)
-    // .get(config.api + '/api/quizzes')
     .then(res => {
-      console.log(res)
-      // dispatch(successNewQuiz())
+      dispatch(receiveQuiz(res.data))
+      dispatch(doneFetching())
     })
-    .catch(err => console.dir(err))
+    .catch(err => {
+      console.dir(err)
+      dispatch(doneFetching())
+    })
 }
 
