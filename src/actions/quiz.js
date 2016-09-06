@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import config from '../config'
-import { FETCHING
-       , DONE_FETCHING
-       , RECEIVE_QUIZ } from '../constants'
+import config           from '../config'
+import { RECEIVE_QUIZ } from '../constants'
+import { fetching
+       , doneFetching } from './fetching'
 
 const requestQuizzes = () => (
   { type: 'REQUEST_QUIZZES' }
@@ -28,18 +28,10 @@ export const fetchQuizzes = () => dispatch => {
     })
 }
 
-const fetching = () => (
-  { type: FETCHING }
-)
-
 const receiveQuiz = quiz => (
   { type: RECEIVE_QUIZ
   , quiz
   }
-)
-
-const doneFetching = () => (
-  { type: DONE_FETCHING }
 )
 
 export const createQuiz = quiz => dispatch => {

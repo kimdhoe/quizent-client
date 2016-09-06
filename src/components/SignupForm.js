@@ -14,6 +14,7 @@ class SignupForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = { username:             ''
+                 , fullname:             ''
                  , email:                ''
                  , password:             ''
                  , passwordConfirmation: ''
@@ -24,13 +25,10 @@ class SignupForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  // Effect - 입력받은 이벤트 객체의 target 정보로 사용자 관련 상태를 채워넣습니다.
   onChange (e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  // 사용자 정보가 올바릅니까?
-  // Effect - 정보가 올바르지 않은 경우 this.state.errors에 해당정보를 채워넣습니다.
   validateUser () {
     const { errors, isValid } = validate(this.state)
 
@@ -40,8 +38,6 @@ class SignupForm extends React.Component {
     return isValid
   }
 
-  // effect - 사용자 정보가 올바른지 확인하고 오류 상태를 채워넣습니다.
-  //          서버에 사용자 등록 요청을 보내고 응답을 받아 처리합니다.
   onSubmit (e) {
     e.preventDefault()
 
@@ -52,19 +48,19 @@ class SignupForm extends React.Component {
                    )
       this.props.signupRequest(this.state)
         .then(res => {
-          // 사용자 등록 성공시 로그인합니다.
+          console.log(res)
           this.props.login(res.data.token, res.data.username)
 
-          // 사용자 정보 페이지로 리다이렉트합니다.
           this.context.router.push('/me')
 
           this.props.showWelcome(
             { type: 'success'
-            , text: '환영합니다!'
+            , text: 'Welcome!'
             }
           )
         })
         .catch(err => {
+          console.dir(err)
           this.setState({ errors:     err.response.data
                         , isFetching: false
                         }
@@ -78,20 +74,28 @@ class SignupForm extends React.Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <h2>가입</h2>
+        <h2>Signup</h2>
 
         <InputField
           fieldName="username"
-          label="이름"
+          label="Username"
           value={this.state.username}
           error={errors.username}
           onChange={this.onChange}
         />
 
         <InputField
+          fieldName="fullname"
+          label="Full Name"
+          value={this.state.fullname}
+          error={errors.fullname}
+          onChange={this.onChange}
+        />
+
+        <InputField
           type="email"
           fieldName="email"
-          label="이메일"
+          label="Email"
           value={this.state.email}
           error={errors.email}
           onChange={this.onChange}
@@ -100,7 +104,7 @@ class SignupForm extends React.Component {
         <InputField
           type="password"
           fieldName="password"
-          label="암호"
+          label="Password"
           value={this.state.password}
           error={errors.password}
           onChange={this.onChange}
@@ -109,7 +113,7 @@ class SignupForm extends React.Component {
         <InputField
           type="password"
           fieldName="passwordConfirmation"
-          label="암호 확인"
+          label="Password Confirmation"
           value={this.state.passwordConfirmation}
           error={errors.passwordConfirmation}
           onChange={this.onChange}
@@ -120,7 +124,7 @@ class SignupForm extends React.Component {
             disabled={this.state.isFetching}
             className="btn btn-primary btn-lg"
           >
-            보내기
+            Signup
           </button>
         </div>
       </form>

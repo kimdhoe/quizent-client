@@ -7,15 +7,19 @@ const Navigation = ({ isUserLoggedIn, isFetching, username, logout }) => {
     logout()
   }
 
-  const userLinks = <ul className="nav navbar-nav navbar-right">
-                      <li><Link to="/me"><strong>{username}</strong></Link></li>
-                      <li><a href="#" onClick={onClick}>Logout</a></li>
-                    </ul>
-  const guestLinks = <ul className="nav navbar-nav navbar-right">
-                       <li><Link to="/protected">Protected</Link></li>
-                       <li><Link to="/signup">Sign up</Link></li>
-                       <li><Link to="/login">Login</Link></li>
-                     </ul>
+  const userLinks =
+    <ul className="nav navbar-nav navbar-right">
+      <li><Link to="/users">Users</Link></li>
+      <li><Link to="/me"><strong>{username}</strong></Link></li>
+      <li><a href="#" onClick={onClick}>Logout</a></li>
+    </ul>
+
+  const guestLinks =
+    <ul className="nav navbar-nav navbar-right">
+      <li><Link to="/protected">Protected</Link></li>
+      <li><Link to="/signup">Sign up</Link></li>
+      <li><Link to="/login">Login</Link></li>
+    </ul>
 
   return (
     <nav className="navbar navbar-default">
@@ -27,7 +31,7 @@ const Navigation = ({ isUserLoggedIn, isFetching, username, logout }) => {
           }
         </div>
 
-        <div className="coljapse navbar-collapse">
+        <div className="collapse navbar-collapse">
           {isUserLoggedIn ? userLinks : guestLinks}
         </div>
       </div>
@@ -37,8 +41,9 @@ const Navigation = ({ isUserLoggedIn, isFetching, username, logout }) => {
 
 Navigation.propTypes =
   { isUserLoggedIn: React.PropTypes.bool.isRequired
+  , isFetching:     React.PropTypes.bool.isRequired
   , username:       React.PropTypes.string.isRequired
-  , logout:   React.PropTypes.func.isRequired
+  , logout:         React.PropTypes.func.isRequired
   }
 
 export default Navigation

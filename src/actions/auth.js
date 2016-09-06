@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { SET_CURRENT_USER 
+import { SET_CURRENT_USER
        , REMOVE_CURRENT_USER } from '../constants'
 import setAuthToken            from '../utils/setAuthToken'
 import config                  from '../config'

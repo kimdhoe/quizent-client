@@ -33,9 +33,10 @@ class QuizInput extends React.Component {
               <textarea
                 id="questionInput"
                 className="form-control"
-                rows="3"
+                rows="2"
                 onChange={this.onChange}
                 value={this.state.question}
+                placeholder="Solve this"
               >
               </textarea>
             </div>

@@ -10,3 +10,5 @@ export const RECEIVE_QUIZZES = 'RECEIVE_QUIZZES'
 export const RECEIVE_QUIZ  = 'RECEIVE_QUIZ'
 export const FETCHING      = 'FETCHING'
 export const DONE_FETCHING = 'DONE_FETCHING'
+
+export const RECEIVE_USERS = 'RECEIVE_USERS'
