@@ -56,7 +56,7 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
 NavBar.propTypes =
   { isUserLoggedIn: React.PropTypes.bool.isRequired
   , isFetching:     React.PropTypes.bool.isRequired
-  , username:       React.PropTypes.string.isRequired
+  , username:       React.PropTypes.string
   , logout:         React.PropTypes.func.isRequired
   }
 

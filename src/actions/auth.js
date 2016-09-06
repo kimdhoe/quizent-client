@@ -18,14 +18,14 @@ export const removeCurrentUser = () => (
 )
 
 export const login = (token, username) => dispatch => {
-  // 토큰과 이름을 저장합니다.
+  // Save token and username in local storage.
   localStorage.setItem('jwt',      token)
   localStorage.setItem('username', username)
 
-  // 이후의 모든 HTTP 요청에 토큰이 실려가도록 설정합니다.
+  // Configure Axios to automatically include authorization token in the header.
   setAuthToken(token)
 
-  // Redux store에 사용자 이름을 저장합니다.
+  // Set current username in Redux store.
   dispatch(setCurrentUser(username))
 }
 
@@ -41,7 +41,6 @@ export const loginRequest = component => dispatch => {
 
       dispatch(login(token, username))
 
-      // 홈페이지로 리다이렉트합니다.
       component.context.router.push('/')
     })
     .catch(err => component.setState({ errors:     err.response.data.errors

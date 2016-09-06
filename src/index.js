@@ -12,8 +12,6 @@ import reducer                    from './reducer'
 import initAuthInfo               from './utils/initAuthInfo'
 import { removeAllFlashMessages } from './actions/flashMessages'
 
-import { createNewQuiz } from './actions/quiz'
-
 const store = createStore( reducer
                          , applyMiddleware(thunkMiddleware)
                          )

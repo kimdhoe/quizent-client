@@ -23,9 +23,6 @@
     color: $btn-default-text-color;
     cursor: pointer;
 
-    /**
-     * States
-     */
     &:hover {
         background-color: darken($btn-default-bg, 7%);
         color: $btn-default-text-color;
@@ -43,22 +40,18 @@
     }
 
     &.is-disabled:hover,
-    &.is-disabled:active {
+    &.is-disabled:active,
+    &:disabled:hover,
+    &:disabled:active {
         background-color: lighten($btn-default-bg, 3%);
         color: $muted-text-color;
     }
 }
 
-/**
- * Modifier : 버튼 색상 추가. 기본 버튼보다 눈에 더 잘 띄는 색으로.
- */
 .Button--primary {
     background-color: $btn-primary-bg;
     color: $btn-primary-text-color;
 
-    /**
-     * States
-     */
     &:hover {
         background-color: darken($btn-primary-bg, 7%);
         color: $btn-primary-text-color;
@@ -69,8 +62,5 @@
     }
 }
 
-/**
- * Modifier : 버튼 크기 추가. font-size와 padding(em) 변화.
- */
 .Button--small { font-size:  0.75em; }
 .Button--large { font-size: 1.333em; }

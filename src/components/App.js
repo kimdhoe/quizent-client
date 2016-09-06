@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../style/index.scss'
+
 import NavBarContainer        from '../containers/NavBarContainer'
 import FlashMessagesContainer from '../containers/FlashMessagesContainer'
 
