@@ -25,14 +25,18 @@ class QuizInput extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-              <label htmlFor="questionInput">Question</label>
+        <div className="QuizInput">
+          <form className="QuizInput-form" onSubmit={this.onSubmit}>
+            <div className="Field QuizInput-question">
+              <label
+                className="QuizInput-questionLabel"
+                htmlFor="questionInput"
+              >
+                Question
+              </label>
               <textarea
                 id="questionInput"
-                className="form-control"
+                className="QuizInput-questionTextarea"
                 rows="2"
                 onChange={this.onChange}
                 value={this.state.question}
@@ -40,16 +44,16 @@ class QuizInput extends React.Component {
               >
               </textarea>
             </div>
+
             <button
               type="submit"
-              className="btn btn-default"
+              className="QuizInput-button Button"
               disabled={this.props.isFetching}
             >
               Send
             </button>
           </form>
         </div>
-      </div>
     )
   }
 }

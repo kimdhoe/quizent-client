@@ -1,0 +1,96 @@
+/* ==========================================================================
+   #TYPOGRAPHY / BASE
+   ========================================================================== */
+
+$link-font-weight: $bold-font-weight !default;
+
+
+html {
+    font-size: $base-font-size / 16px * 1em;
+}
+
+html,
+input,
+button,
+textarea {
+    -webkit-font-smoothing: antialiased;
+    text-rendering:         optimizeLegibility;
+}
+
+body {
+    font-family:      $body-font-family;
+    font-weight:      $base-font-weight;
+    line-height:      $base-line-height;
+    color:            $base-text-color;
+    background-color: $base-bg-color;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-weight: $bold-font-weight; }
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+    margin:      $base-spacing 0 0.5em;
+    line-height: 1.2;
+}
+
+h1, .h1 { font-size:  $h1-size; margin-top: 0; }
+h2, .h2 { font-size:  $h2-size; }
+h3, .h3 { font-size:  $h3-size; }
+h4, .h4 { font-size:  $h4-size; }
+h5, .h5 { font-size:  $h5-size; }
+h6, .h6 { font-size:  $h6-size; }
+
+small, .small { font-size: $small-font-size; }
+
+p { margin: 0 0 $base-spacing / 2 0; }
+
+a {
+    font-weight: $link-font-weight;
+    color: $link-color;
+    text-decoration: none;
+    border-bottom: 0.1em solid $link-color;
+
+//    &:visited {
+//        color: mix($link-color, #000, 60%);
+//    }
+
+    &:hover {
+        color: $link-hover-color;
+    }
+}
+
+em, i { font-style: italic; }
+dt,
+strong, b { font-weight: $bold-font-weight; }
+
+.code { font-family: monospace, monospace; }
+
+ul, ol,
+dl {
+    margin: 0 0 $base-spacing 0;
+}
+
+ul, ol {
+    padding-left: $base-spacing;
+}
+
+dt { margin: $base-spacing / 5 0; }
+dd { margin-left: $base-spacing / 2; }
+
+blockquote {
+    color: $muted-text-color;
+    margin-left: $base-spacing / 2;
+    margin-bottom: $base-spacing / 2;
+    padding-left: $base-spacing / 2;
+    border-left: 3px solid $hr-color;
+}
+
+hr {
+    border: 0;
+    background: $hr-color;
+    height: 1px;
+    margin: $base-spacing 0;
+}
+
+section {
+    margin-bottom: $base-spacing * 2;
+}

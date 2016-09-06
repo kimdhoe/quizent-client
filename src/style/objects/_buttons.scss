@@ -1,0 +1,76 @@
+/* ==========================================================================
+   #BUTTONS / OBJECTS
+   ========================================================================== */
+
+/**
+ * .Button 클래스는 button, Input:submit, Input:button, a 태그에 사용한다.
+ *
+ * 1. 대략의 브라우저 디폴트 값인 1.2로 맞춘다.
+ *    몇몇 브라우저에서 line-height는 버튼이나 인풋 요소에 효력이 없기 때문에.
+ */
+.Button {
+    -webkit-appearance: none;
+    display: inline-block;
+    border: 0;
+    border-radius: $base-radius;
+    padding: 0.75em 1.4em;
+    background-color: $btn-default-bg;
+    line-height: 1.2; /* 1 */
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: $base-font-weight;
+    text-decoration: none;
+    color: $btn-default-text-color;
+    cursor: pointer;
+
+    /**
+     * States
+     */
+    &:hover {
+        background-color: darken($btn-default-bg, 7%);
+        color: $btn-default-text-color;
+    }
+
+    &:active {
+        background-color: darken($btn-default-bg, 15%);
+    }
+
+    &.is-disabled,
+    &:disabled {
+        background-color: lighten($btn-default-bg, 3%);
+        color: $muted-text-color;
+        cursor: default;
+    }
+
+    &.is-disabled:hover,
+    &.is-disabled:active {
+        background-color: lighten($btn-default-bg, 3%);
+        color: $muted-text-color;
+    }
+}
+
+/**
+ * Modifier : 버튼 색상 추가. 기본 버튼보다 눈에 더 잘 띄는 색으로.
+ */
+.Button--primary {
+    background-color: $btn-primary-bg;
+    color: $btn-primary-text-color;
+
+    /**
+     * States
+     */
+    &:hover {
+        background-color: darken($btn-primary-bg, 7%);
+        color: $btn-primary-text-color;
+    }
+
+    &:active {
+        background-color: darken($btn-primary-bg, 15%);
+    }
+}
+
+/**
+ * Modifier : 버튼 크기 추가. font-size와 padding(em) 변화.
+ */
+.Button--small { font-size:  0.75em; }
+.Button--large { font-size: 1.333em; }

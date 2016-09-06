@@ -1,0 +1,37 @@
+// ============================================================================
+// #PREFIX / UTIL
+// ============================================================================
+
+$enable-grid-prefix: false !default;
+
+@if ($enable-grid-prefix == true) {
+
+    /**
+     * #Prefix
+     * Increase or decrease prefixed margin to offset a grid cell.
+     */
+    @for $i from 0 through $column-count - 1 {
+        .prefix-#{$i} {
+            margin-left: 100 / $column-count * $i * 1%;
+        }
+    }
+
+    @each $key, $value in $breakpoints {
+
+        @include media($key) {
+
+            @for $i from 0 through $column-count - 1 {
+                .prefix-#{$key}-#{$i} {
+                    margin-left: 100 / $column-count * $i * 1%;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Give prefixed spacing to other elements
+ */
+.prefix-spacing {
+    margin-left: $base-spacing;
+}

@@ -1,0 +1,66 @@
+/* ---------------------------------------------------------------------
+   #GRID SYSTEM / OBJECTS
+   --------------------------------------------------------------------- */
+
+$grid-vertical-spacing: $base-spacing !default;
+
+/**
+ * @Todo
+ *
+ * Add a variable that controls the whitespace between inline-block elements.
+ * So that authors can toggle the font-size hack.
+ * Recommend to remove whitespaces from markup.
+ * $whitespace-hack: false !default;
+ *
+
+
+/**
+ * .container는 내용을 가운데로 정렬하고, 최대 너비를 제한한다.
+ */
+.container {
+    margin: 0 auto;
+    width: 95%;
+    max-width: 1000px;
+}
+
+/**
+ * 1. 리셋.
+ * 2. inline-block 요소 사이의 공백 제거
+ * @Todo @extend 가능하게 만들 것. 혹은 mixin으로?
+ */
+.Grid {
+    display: block; /* 1 */
+    list-style: none; /* 1 */
+    margin: 0 0 $grid-vertical-spacing (-$gutter); /* 1 */
+    padding: 0; /* 1 */
+    text-align: left; /* 1 */
+    font-size: 0; /* 2 */
+    line-height: 0; /* 2 */
+}
+
+/**
+ * Modifier : alignment 옵션
+ */
+.Grid--center { text-align: center; }
+.Grid--right {  text-align: right; }
+.Grid--middle > .Grid-cell {   vertical-align: middle; }
+.Grid--bottom > .Grid-cell {   vertical-align: bottom; }
+.Grid--baseline > .Grid-cell { vertical-align: baseline; }
+
+/**
+ * 칼럼. 너비는 size 유틸리티 클래스로 조절한다.
+ * 1. inline-block 그리드 시스템.
+ * 2. gutter는 칼럼 왼쪽편에.
+ * 3. .Row에 의해 0으로 조정된 속성을 재설정한다.
+ * 4. 높이가 다른 칼럼들은 위쪽 가장자리에 맞춰 정렬한다.
+ */
+.Grid-cell {
+    display: inline-block; /* 1 */
+    width: 100%;
+    padding: 0 0 0 $gutter; /* 2 */
+    font-size: $base-font-size; /* 3 */
+    line-height: $base-line-height; /* 3 */
+    vertical-align: top; /* 4 */
+    text-align: left;
+}
+

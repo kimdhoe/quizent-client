@@ -17,17 +17,16 @@ class UserList extends React.Component {
     const { users } = this.props
 
     return (
-      <div className="row">
-        <div className="col-md-12 userList">
-          <h2>Users</h2>
-          {users.map(user =>
-            <User
-              key={user._id}
-              fullname={user.fullname}
-              username={user.username}
-            />
-            )}
-        </div>
+      <div className="UserList">
+        <h2 className="UserList-title">User List</h2>
+
+        {users.map(user =>
+          <User
+            key={user._id}
+            fullname={user.fullname}
+            username={user.username}
+          />
+        )}
       </div>
     )
   }
