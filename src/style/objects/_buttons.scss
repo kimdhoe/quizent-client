@@ -18,8 +18,11 @@
     line-height: 1.2; /* 1 */
     font-family: inherit;
     font-style: inherit;
+    font-size: $btn-small-font-size;
     font-weight: $base-font-weight;
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     color: $btn-default-text-color;
     cursor: pointer;
 

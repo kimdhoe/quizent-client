@@ -14,13 +14,12 @@ class QuizInput extends React.Component {
   onSubmit (e) {
     e.preventDefault()
 
-    this.setState({ isLoading: true })
     this.props.createQuiz(this.state)
       .then(() => this.setState({ question: '' }))
   }
 
   onChange (e) {
-    this.setState({ question: e.target.value })
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   render() {
@@ -35,8 +34,9 @@ class QuizInput extends React.Component {
                 Question
               </label>
               <textarea
-                id="questionInput"
                 className="QuizInput-questionTextarea"
+                id="questionInput"
+                name="question"
                 rows="2"
                 onChange={this.onChange}
                 value={this.state.question}
@@ -47,10 +47,10 @@ class QuizInput extends React.Component {
 
             <button
               type="submit"
-              className="QuizInput-button Button"
+              className="QuizInput-button Button Button--primary"
               disabled={this.props.isFetching}
             >
-              Send
+              Create
             </button>
           </form>
         </div>

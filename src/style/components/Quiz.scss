@@ -1,13 +1,15 @@
-.User {
+.Quiz {
   background-color: $color-pale-gray;
   margin: $base-spacing 0;
   padding: $base-spacing / 2 $base-spacing;
 }
 
-.User-username {
+.Quiz-header > * {
+  margin-right: $base-spacing / 2;
+}
+
+.Quiz-timestamp {
   color: $muted-text-color;
 }
 
-.User-body {
-  margin: 1em 0;
-}
+

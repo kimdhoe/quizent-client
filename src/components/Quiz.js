@@ -1,22 +1,30 @@
-import React from 'react'
+import React    from 'react'
 import { Link } from 'react-router'
-import moment from 'moment'
+import moment   from 'moment'
 
 class Quiz extends React.Component {
-  static propTypes = { question: React.PropTypes.string.isRequired }
+  static propTypes = { quiz: React.PropTypes.object.isRequired }
 
   render() {
-    const { question, author, createdAt } = this.props
+    const { quiz } = this.props
 
     return (
-      <div className="col-md-12 quiz">
-        <p className="info">
-          <Link to={`/user/${author.username}`}>
-            <strong>@{author.username}</strong>
+      <div className="Quiz">
+        <header className="Quiz-header">
+          <strong className="Quiz-fullname">
+            {quiz.author.fullname}
+          </strong>
+          <Link className="Quiz-username" to={`/user/${quiz.author.username}`}>
+            @{quiz.author.username}
           </Link>
-          <span className="timestamp"> {moment(createdAt).fromNow()}</span>
-        </p>
-        <p className="question">{question}</p>
+          <span className="Quiz-timestamp">
+            {moment(quiz.createdAt).fromNow()}
+          </span>
+        </header>
+
+        <div className="Quiz-body">
+          <p className="Quiz-question">{quiz.question}</p>
+        </div>
       </div>
     )
   }

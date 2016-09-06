@@ -44,14 +44,8 @@ small, .small { font-size: $small-font-size; }
 p { margin: 0 0 $base-spacing / 2 0; }
 
 a {
-    font-weight: $link-font-weight;
     color: $link-color;
     text-decoration: none;
-    border-bottom: 0.1em solid $link-color;
-
-//    &:visited {
-//        color: mix($link-color, #000, 60%);
-//    }
 
     &:hover {
         color: $link-hover-color;
