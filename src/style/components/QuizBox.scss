@@ -1,14 +1,14 @@
-.Quiz {
+.QuizBox {
   background-color: $color-pale-gray;
   margin: $base-spacing 0;
   padding: $base-spacing / 2 $base-spacing;
 }
 
-.Quiz-header > * {
+.QuizBox-header > * {
   margin-right: $base-spacing / 2;
 }
 
-.Quiz-timestamp {
+.QuizBox-timestamp {
   color: $muted-text-color;
 }
 

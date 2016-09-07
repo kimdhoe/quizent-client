@@ -1,11 +1,18 @@
 import React from 'react'
 
-class FollowButton extends React.Component {
-  render() {
-    return (
-      <button onClick={onClick}>{buttonText}</button>
-    )
+const FollowButton = ({ isFetching, buttonText, onClick }) =>
+  <button
+    className="FollowButton Button Button--primary"
+    onClick={onClick}
+    disabled={isFetching}
+  >
+    {buttonText}
+  </button>
+
+FollowButton.propTypes =
+  { isFetching:   React.PropTypes.bool.isRequired
+  , buttonText:   React.PropTypes.string.isRequired
+  , onClick:      React.PropTypes.func.isRequired
   }
-}
 
 export default FollowButton

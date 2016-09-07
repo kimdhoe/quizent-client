@@ -1,13 +1,13 @@
-.User {
+.UserBox {
   background-color: $color-pale-gray;
   margin: $base-spacing 0;
   padding: $base-spacing / 2 $base-spacing;
 }
 
-.User-username {
+.UserBox-username {
   color: $muted-text-color;
 }
 
-.User-body {
+.UserBox-body {
   margin: 1em 0;
 }

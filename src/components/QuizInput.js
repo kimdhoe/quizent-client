@@ -1,4 +1,4 @@
-import React from 'react'
+ import React from 'react'
 
 class QuizInput extends React.Component {
   static propTypes = { createQuiz: React.PropTypes.func.isRequired }
@@ -33,6 +33,7 @@ class QuizInput extends React.Component {
               >
                 Question
               </label>
+
               <textarea
                 className="QuizInput-questionTextarea"
                 id="questionInput"
@@ -47,7 +48,7 @@ class QuizInput extends React.Component {
 
             <button
               type="submit"
-              className="QuizInput-button Button Button--primary"
+              className="QuizInput-button Button"
               disabled={this.props.isFetching}
             >
               Create

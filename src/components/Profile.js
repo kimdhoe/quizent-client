@@ -1,5 +1,7 @@
 import React from 'react'
 
+import UserBox from './UserBox'
+
 class Profile extends React.Component {
   static propTypes = { shownUser: React.PropTypes.object.isRequired
                      , quizzes:   React.PropTypes.array.isRequired
@@ -10,8 +12,19 @@ class Profile extends React.Component {
     this.props.fetchUser(this.props.params.username)
   }
 
+  handleFollow (id) {
+    this.props.handleFollow(id)
+  }
+
+  handleUnfollow (id) {
+
+  }
+
   render() {
     const { shownUser, quizzes } = this.props
+    const shouldShowFollow = this.props.username !== this.props.shownUser.username
+    const buttonText = this.props.shownUser.followed ? "Unfollow" : "Follow"
+    const toggleFollow = 
 
     return (
       <div className="container">
@@ -28,7 +41,13 @@ class Profile extends React.Component {
             <div className="ProfileSidebar-follow">
               {this.props.shownUser.followed &&
                 // TODO FOLLOW BUTTON
-                "Unfollow"
+                <UserBox
+                  user={this.props.shownUser}
+                  isFetching={this.props.isFetching}
+                  shouldShowFollow={this.props.username !== this.props.shownUser.username}
+                  buttonText={this.props.shownUser.followed ? "Unfollow" : "Follow"}
+                  toggleFollow={}
+                />
               }
               FOLLOW BUTTON
             </div>

@@ -1,23 +1,22 @@
 import React from 'react'
 
-import QuizInput from './QuizInput'
-import QuizList from './QuizList'
+import QuizBox from './QuizBox'
 
 class Timeline extends React.Component {
   static propTypes = { quizzes:    React.PropTypes.array.isRequired
-                     , isFetching: React.PropTypes.bool.isRequired
-                     , createQuiz: React.PropTypes.func.isRequired
                      }
 
   render() {
-    const { isFetching, quizzes, createQuiz } = this.props
+    const { quizzes } = this.props
 
     return (
-      <div className="Timeline container">
+      <div className="Timeline">
         <h2 className="Timeline-title">Timeline</h2>
+
         <div>
-          <QuizInput isFetching={isFetching} createQuiz={createQuiz} />
-          <QuizList quizzes={quizzes} />
+          {quizzes.map(quiz =>
+            <QuizBox key={quiz._id} quiz={quiz} />
+          )}
         </div>
       </div>
     )
