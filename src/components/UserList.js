@@ -77,7 +77,7 @@ class UserList extends React.Component {
 
   render () {
     return (
-      <div className="UserList">
+      <div className="UserList container">
         <h2 className="UserList-title">User List</h2>
 
         {this.state.users.map(user => {

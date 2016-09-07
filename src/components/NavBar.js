@@ -1,6 +1,8 @@
 import React    from 'react'
 import { Link } from 'react-router'
 
+import Loader from './Loader'
+
 const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
   const onClick = e => {
     e.preventDefault()
@@ -8,20 +10,20 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
   }
 
   const userLinks =
-    <ul className="NavBar-items Grid--right">
-      <li className="NavBar-item Grid-cell size-tall-2of12">
+    <ul className="NavBar-itemList">
+      <li className="NavBar-item">
         <Link className="NavBar-link" to="/users">Users</Link>
       </li>
-      <li className="NavBar-item Grid-cell size-tall-2of12">
+      <li className="NavBar-item">
         <Link className="NavBar-link" to="/me"><strong>{username}</strong></Link>
       </li>
-      <li className="NavBar-item Grid-cell size-tall-2of12">
+      <li className="NavBar-item">
         <a className="NavBar-link" href="#" onClick={onClick}>Logout</a>
       </li>
     </ul>
 
   const guestLinks =
-    <ul className="NavBar-items Grid-cell">
+    <ul className="NavBar-itemList">
       <li className="NavBar-item">
         <Link className="NavBar-link" to="/protected">Protected</Link>
       </li>
@@ -34,18 +36,19 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
     </ul>
 
   return (
-    <header>
-      <nav className="NavBar Grid">
-        <div className="Grid-cell size-tall-4of12">
-          <h1 className="NavBar-brand">
-            <Link to="/" className="NavBar-brand">Quizent</Link>
-          </h1>
+    <header className="NavBar">
+      <nav className="container">
+        <h1 className="NavBar-brand">
+          <Link to="/" className="NavBar-brandLink">Quizent</Link>
+        </h1>
+
+        <div className="NavBar-loader">
           {isFetching &&
-            <span className="NavBar-loader">loading...</span>
+            <Loader />
           }
         </div>
 
-        <div className="Grid-cell size-tall-8of12">
+        <div className="NavBar-links">
           {isUserLoggedIn ? userLinks : guestLinks}
         </div>
       </nav>

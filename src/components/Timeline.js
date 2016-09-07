@@ -13,7 +13,7 @@ class Timeline extends React.Component {
     const { isFetching, quizzes, createQuiz } = this.props
 
     return (
-      <div className="row timeline">
+      <div className="Timeline container">
         <h2 className="col-md-12">Timeline</h2>
         <div className="col-md-12">
           <QuizInput isFetching={isFetching} createQuiz={createQuiz} />

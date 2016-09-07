@@ -1,15 +1,40 @@
-.NavBar a {
-  border: 0;
+.NavBar {
+  background-color: $color-pale-gray;
+
+  @include clearfix();
 }
 
-.NavBar-items {
-  margin: 1em;
+.NavBar-brand {
+  float: left;
+  line-height: 50px;
+  margin: 0;
+  font-size: $h4-size;
+}
+
+.NavBar-loader {
+  float: left;
+  margin: 0 1em;
+  width: 50px;
+}
+
+.NavBar-links {
+  float: right;
+  line-height: 50px;
+}
+
+.NavBar-itemList {
+  margin: 0;
   padding: 0;
+  font-size: 0.9em;
 }
 
 .NavBar-item {
   display: inline-block;
-  padding: 0;
+  padding: 0 0 0 1em;
   list-style-type: none;
   text-align: center;
+}
+
+.NavBar-link {
+  display: block;
 }

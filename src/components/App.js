@@ -8,7 +8,7 @@ import FlashMessagesContainer from '../containers/FlashMessagesContainer'
 class App extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div>
         <NavBarContainer />
         <FlashMessagesContainer />
         {this.props.children}
