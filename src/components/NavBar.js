@@ -25,9 +25,6 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
   const guestLinks =
     <ul className="NavBar-itemList">
       <li className="NavBar-item">
-        <Link className="NavBar-link" to="/protected">Protected</Link>
-      </li>
-      <li className="NavBar-item">
         <Link className="NavBar-link" to="/signup">Sign up</Link>
       </li>
       <li className="NavBar-item">

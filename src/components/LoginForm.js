@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
 
     return (
       <form onSubmit={this._onSubmit}>
-        <h2>로그인</h2>
+        <h2>Login</h2>
 
         {errors.form &&
           <div className="alert alert-danger">{errors.form}</div>
@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
 
         <InputField
           fieldName="identifier"
-          label="이름/이메일"
+          label="Username or Email"
           value={identifier}
           error={errors.identifier}
           onChange={this._onChange}
@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
         <InputField
           type="password"
           fieldName="password"
-          label="암호"
+          label="Password"
           value={password}
           error={errors.password}
           onChange={this._onChange}
@@ -69,10 +69,10 @@ class LoginForm extends React.Component {
 
       <div className="form-group">
         <button
-          className="btn btn-primary btn-lg"
+          className="Button"
           disabled={isFetching}
         >
-          로그인
+          Login
         </button>
       </div>
       </form>

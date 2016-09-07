@@ -1,6 +1,7 @@
 import React       from 'react'
 import { connect } from 'react-redux'
 
+import Greetings               from './Greetings'
 import UserBox                 from './UserBox'
 import QuizInput               from './QuizInput'
 import Timeline                from './Timeline'
@@ -20,9 +21,7 @@ class Home extends React.Component {
 
     if (!isUserLoggedIn)
       return (
-        <div>
-          <p>Login required.</p>
-        </div>
+        <Greetings />
       )
 
     return (

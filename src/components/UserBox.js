@@ -1,12 +1,15 @@
-import React from 'react'
+import React    from 'react'
+import { Link } from 'react-router'
 
 import FollowButton from './FollowButton'
 
 const UserBox = ({ isFetching, isMe, user, buttonText, toggleFollow }) =>
   <div className="UserBox">
     <header className="UserBox-names">
-      <strong className="UserBox-fullname">{user.fullname}</strong>
-      <span className="UserBox-username"> @{user.username}</span>
+      <Link to={`/user/${user.username}`}>
+        <strong className="UserBox-fullname">{user.fullname}</strong>
+        <span className="UserBox-username"> @{user.username}</span>
+      </Link>
     </header>
 
     <div className="UserBox-body">

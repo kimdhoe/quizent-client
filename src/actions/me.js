@@ -19,13 +19,17 @@ const receiveMyQuzzes = quizzes => (
   }
 )
 
+const receiveMyQuiz = quiz => (
+  { type: RECEIVE_MY_QUIZ
+  , quiz
+  }
+)
+
 export const fetchMe = () => dispatch => {
   dispatch(fetching())
 
   return axios.get(config.api + '/api/me')
     .then(res => {
-      console.log(res.data)
-
       dispatch(receiveMe(res.data.me))
       dispatch(receiveMyQuzzes(res.data.quizzes))
 
@@ -33,16 +37,9 @@ export const fetchMe = () => dispatch => {
     })
     .catch(err => {
       dispatch(doneFetching())
-
       console.error(err)
     })
 }
-
-const receiveMyQuiz = quiz => (
-  { type: RECEIVE_MY_QUIZ
-  , quiz
-  }
-)
 
 export const createQuiz = quiz => dispatch => {
   dispatch(fetching())

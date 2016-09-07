@@ -11,12 +11,11 @@ class QuizBox extends React.Component {
     return (
       <div className="QuizBox">
         <header className="QuizBox-header">
-          <strong className="QuizBox-fullname">
-            {quiz.author.fullname}
-          </strong>
           <Link className="QuizBox-username" to={`/user/${quiz.author.username}`}>
-            @{quiz.author.username}
+            <strong className="QuizBox-fullname">{quiz.author.fullname}</strong>
+            <span className="UserBox-username"> @{quiz.author.username}</span>
           </Link>
+
           <span className="QuizBox-timestamp">
             {moment(quiz.createdAt).fromNow()}
           </span>

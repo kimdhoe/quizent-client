@@ -122,7 +122,7 @@ class SignupForm extends React.Component {
         <div className="form-group">
           <button
             disabled={this.state.isFetching}
-            className="btn btn-primary btn-lg"
+            className="Button"
           >
             Signup
           </button>

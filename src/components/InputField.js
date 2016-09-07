@@ -2,7 +2,7 @@ import React      from 'react'
 import classnames from 'classnames'
 
 const InputField = ({ type, fieldName, label, value, error, onChange }) =>
-  <div className={classnames("form-group", { "has-error": error })}>
+  <div className={classnames("Field", { "has-error": error })}>
     <label className="control-label" htmlFor="passwordConfirmation">
       {label}
     </label>
