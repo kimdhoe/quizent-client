@@ -1,11 +1,13 @@
-import React               from 'react'
-import { render }          from 'react-dom'
+import React                     from 'react'
+import { render }                from 'react-dom'
 import { createStore
-       , applyMiddleware } from 'redux'
-import { Provider }        from 'react-redux'
+       , applyMiddleware }       from 'redux'
+import { Provider }              from 'react-redux'
 import { Router
-       , browserHistory }  from 'react-router'
-import thunkMiddleware     from 'redux-thunk'
+       , browserHistory
+       , applyRouterMiddleware } from 'react-router'
+import { useScroll }             from 'react-router-scroll'
+import thunkMiddleware           from 'redux-thunk'
 
 import routes                     from './routes'
 import reducer                    from './reducer'
@@ -24,7 +26,15 @@ initAuthInfo(store.dispatch)
 browserHistory.listen(() => store.dispatch(removeAllFlashMessages()))
 
 render( <Provider store={store}>
-          <Router history={browserHistory} routes={routes} />
+          <Router
+            history={browserHistory}
+            routes={routes}
+            render={applyRouterMiddleware(useScroll((prev, curr) => {
+              if (prev && prev.location.pathname === curr.location.pathname)
+                return false
+              return true
+            }))}
+          />
         </Provider>
       , document.getElementById('app')
       )
