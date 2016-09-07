@@ -6,6 +6,7 @@ import quizzes        from './quizzes'
 import isUserLoggedIn from './isUserLoggedIn'
 import isFetching     from './isFetching'
 import users          from './users'
+import shownUser      from './shownUser'
 
 const reducer = combineReducers({ flashMessages
                                 , username
@@ -13,6 +14,7 @@ const reducer = combineReducers({ flashMessages
                                 , isUserLoggedIn
                                 , isFetching
                                 , users
+                                , shownUser
                                 }
                                )
 

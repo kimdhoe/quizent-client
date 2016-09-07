@@ -9,7 +9,7 @@ const requestQuizzes = () => (
   { type: 'REQUEST_QUIZZES' }
 )
 
-const receiveQuizzes = quizzes => (
+export const receiveQuizzes = quizzes => (
   { type: 'RECEIVE_QUIZZES'
   , quizzes
   }

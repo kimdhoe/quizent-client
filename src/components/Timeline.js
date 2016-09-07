@@ -14,8 +14,8 @@ class Timeline extends React.Component {
 
     return (
       <div className="Timeline container">
-        <h2 className="col-md-12">Timeline</h2>
-        <div className="col-md-12">
+        <h2 className="Timeline-title">Timeline</h2>
+        <div>
           <QuizInput isFetching={isFetching} createQuiz={createQuiz} />
           <QuizList quizzes={quizzes} />
         </div>
