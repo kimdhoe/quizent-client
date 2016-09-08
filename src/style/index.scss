@@ -65,6 +65,7 @@ $enable-grid-prefix: true;
 $enable-bg-class: true;
 @import "utils/bg";
 @import "utils/states";
+@import "utils/reactAnimation";
 
 /**
  * COMPONENTS
@@ -73,4 +74,5 @@ $enable-bg-class: true;
 @import "components/Loader";
 @import "components/QuizBox";
 @import "components/UserBox";
+@import "components/FollowButton";
 

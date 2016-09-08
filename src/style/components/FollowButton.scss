@@ -1,0 +1,14 @@
+.FollowButton {
+  position: relative;
+  overflow: hidden;
+  width: 120px;
+  height: $base-spacing * 1.5;
+
+  * {
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    line-height: $base-spacing * 1.5;
+  }
+}

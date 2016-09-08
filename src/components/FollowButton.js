@@ -1,4 +1,5 @@
-import React from 'react'
+import React                   from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class FollowButton extends React.Component {
   static propTypes = { buttonText:  React.PropTypes.string.isRequired
@@ -27,7 +28,13 @@ class FollowButton extends React.Component {
         onClick={this.onClick}
         disabled={this.state.isLoading}
       >
-        {buttonText}
+        <ReactCSSTransitionGroup
+          transitionName="buttonText"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          <span key={buttonText}>{buttonText}</span>
+        </ReactCSSTransitionGroup>
       </button>
     )
   }
