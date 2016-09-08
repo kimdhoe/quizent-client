@@ -8,7 +8,6 @@ class UserList extends React.Component {
                      , requestFollow: React.PropTypes.func.isRequired
                      , requestFollow: React.PropTypes.func.isRequired
                      , userList:      React.PropTypes.array.isRequired
-                     , isFetching:    React.PropTypes.bool.isRequired
                      , username:      React.PropTypes.string.isRequired
                      }
 
@@ -17,7 +16,7 @@ class UserList extends React.Component {
   }
 
   render () {
-    const { userList, isFetching, username } = this.props
+    const { userList, username } = this.props
 
     return (
       <div className="UserList container">
@@ -26,7 +25,6 @@ class UserList extends React.Component {
         {userList.map(user =>
           <UserBox
             key={user._id}
-            isFetching={isFetching}
             isMe={username === user.username}
             user={user}
             buttonText={user.followed ? "Unfollow" : "Follow"}

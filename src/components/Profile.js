@@ -8,8 +8,7 @@ import { requestFollow
        , requestUnfollow } from '../actions/following'
 
 class Profile extends React.Component {
-  static propTypes = { isFetching:      React.PropTypes.bool.isRequired
-                     , isMe:            React.PropTypes.bool.isRequired
+  static propTypes = { isMe:            React.PropTypes.bool.isRequired
                      , user:            React.PropTypes.object.isRequired
                      , userQuizzes:     React.PropTypes.array.isRequired
                      , installPolling:  React.PropTypes.func.isRequired
@@ -33,8 +32,7 @@ class Profile extends React.Component {
   }
 
   render () {
-    const { isFetching
-          , isMe
+    const { isMe
           , user
           , userQuizzes
           , requestUnfollow
@@ -43,7 +41,6 @@ class Profile extends React.Component {
     return (
       <div>
         <UserBox
-          isFetching={isFetching}
           isMe={isMe}
           user={user}
           buttonText={user.followed ? "Unfollow" : "Follow"}
@@ -61,9 +58,8 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = ({ username, isFetching, user, userQuizzes }) => (
+const mapStateToProps = ({ username, user, userQuizzes }) => (
   { isMe: username === user.username
-  , isFetching
   , user
   , userQuizzes
   }
@@ -75,7 +71,7 @@ const pollingInstaller = dispatch => username => {
   dispatch(fetchUser(username))
 
   return setInterval( () => dispatch(fetchUser(username))
-                    , 1000
+                    , 10000
                     )
 }
 

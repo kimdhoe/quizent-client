@@ -1,18 +1,37 @@
 import React from 'react'
 
-const FollowButton = ({ isFetching, buttonText, onClick }) =>
-  <button
-    className="FollowButton Button Button--primary"
-    onClick={onClick}
-    disabled={isFetching}
-  >
-    {buttonText}
-  </button>
+class FollowButton extends React.Component {
+  static propTypes = { buttonText:  React.PropTypes.string.isRequired
+                     , handleClick: React.PropTypes.func.isRequired
+                     }
 
-FollowButton.propTypes =
-  { isFetching:   React.PropTypes.bool.isRequired
-  , buttonText:   React.PropTypes.string.isRequired
-  , onClick:      React.PropTypes.func.isRequired
+  constructor () {
+    super()
+    this.state = { isLoading: false }
+
+    this.onClick = this.onClick.bind(this)
   }
+
+  onClick () {
+    this.setState({ isLoading: true })
+    this.props.handleClick()
+      .then(() => this.setState({ isLoading: false }))
+  }
+
+  render () {
+    const { buttonText, onClick } = this.props
+
+    return (
+      <button
+        className="FollowButton Button Button--primary"
+        onClick={this.onClick}
+        disabled={this.state.isLoading}
+      >
+        {buttonText}
+      </button>
+    )
+  }
+}
+
 
 export default FollowButton
