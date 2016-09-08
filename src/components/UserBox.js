@@ -5,8 +5,8 @@ import FollowButton from './FollowButton'
 
 const UserBox = ({ isMe, user, buttonText, toggleFollow }) =>
   <div className="UserBox">
-    <header className="UserBox-names">
-      <Link to={`/user/${user.username}`}>
+    <header>
+      <Link className="UserBox-names" to={`/user/${user.username}`}>
         <strong className="UserBox-fullname">{user.fullname}</strong>
         <span className="UserBox-username"> @{user.username}</span>
       </Link>

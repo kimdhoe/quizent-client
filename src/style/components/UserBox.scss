@@ -4,8 +4,16 @@
   padding: $base-spacing / 2 $base-spacing;
 }
 
+.UserBox-names {
+  color: $base-text-color;
+}
+
+.UserBox-fullname {
+  font-weight: $bold-font-weight;
+}
+
 .UserBox-username {
-  color: $muted-text-color;
+  font-family: monospace;
 }
 
 .UserBox-body {

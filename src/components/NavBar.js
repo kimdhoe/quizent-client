@@ -12,13 +12,13 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
   const userLinks =
     <ul className="NavBar-itemList">
       <li className="NavBar-item">
-        <Link className="NavBar-link" to="/users">Users</Link>
+        <Link className="NavBar-link" to="/users"><span>Users</span></Link>
       </li>
       <li className="NavBar-item">
         <Link className="NavBar-link" to="/me"><strong>{username}</strong></Link>
       </li>
       <li className="NavBar-item">
-        <a className="NavBar-link" href="#" onClick={onClick}>Logout</a>
+        <a className="NavBar-link" href="#" onClick={onClick}><span>Logout</span></a>
       </li>
     </ul>
 
@@ -36,7 +36,7 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
     <header className="NavBar">
       <nav className="container">
         <h1 className="NavBar-brand">
-          <Link to="/" className="NavBar-brandLink">Quizent</Link>
+          <Link to="/" className="NavBar-brandLink"><span>Quizent</span></Link>
         </h1>
 
         <div className="NavBar-loader">

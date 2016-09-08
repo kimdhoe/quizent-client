@@ -4,12 +4,24 @@
   padding: $base-spacing / 2 $base-spacing;
 }
 
+.QuizBox-names {
+  color: $base-text-color;
+}
+
+.QuizBox-fullname {
+  font-weight: $bold-font-weight;
+}
+
+.QuizBox-username {
+  font-family: monospace;
+  color: $base-text-color;
+}
+
 .QuizBox-header > * {
   margin-right: $base-spacing / 2;
 }
 
 .QuizBox-timestamp {
+  font-family: monospace;
   color: $muted-text-color;
 }
-
-
