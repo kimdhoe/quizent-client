@@ -11,12 +11,6 @@
   font-size: $h4-size;
 }
 
-.NavBar-brandLink {
-  ::before {
-    content: ":";
-  }
-}
-
 .NavBar a {
   color: $base-text-color;
 
@@ -52,23 +46,21 @@
 .NavBar-link {
   display: block;
 
+  ::before, ::after {
+    color: transparent;
+    transition: color 150ms ease;
+  }
+
   ::before {
     content: '[';
-    color: transparent;
   }
 
   ::after {
     content: ']';
-    color: transparent;
   }
 
   &:hover {
-    ::before {
-      content: '[';
-      color: $base-text-color;
-    }
-    ::after {
-      content: ']';
+    ::before, ::after {
       color: $base-text-color;
     }
   }
