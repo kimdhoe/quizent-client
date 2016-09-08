@@ -12,13 +12,24 @@ class Profile extends React.Component {
                      , isMe:            React.PropTypes.bool.isRequired
                      , user:            React.PropTypes.object.isRequired
                      , userQuizzes:     React.PropTypes.array.isRequired
-                     , fetchUser:       React.PropTypes.func.isRequired
+                     , installPolling:  React.PropTypes.func.isRequired
                      , requestFollow:   React.PropTypes.func.isRequired
                      , requestUnfollow: React.PropTypes.func.isRequired
                      }
 
+  constructor () {
+    super()
+    this.state = { intervalID: null }
+  }
+
   componentWillMount () {
-    this.props.fetchUser(this.props.params.username)
+    const intervalID = this.props.installPolling(this.props.params.username)
+
+    this.setState({ intervalID: intervalID })
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.state.intervalID)
   }
 
   render () {
@@ -58,9 +69,21 @@ const mapStateToProps = ({ username, isFetching, user, userQuizzes }) => (
   }
 )
 
-export default connect( mapStateToProps
-                      , { fetchUser
-                        , requestFollow
-                        , requestUnfollow
-                        }
-                      )(Profile)
+// Given a Redux dispatch function, produces a user-polling installer
+// procedure, which returns an interval-ID for clearing on unmounting.
+const pollingInstaller = dispatch => username => {
+  dispatch(fetchUser(username))
+
+  return setInterval( () => dispatch(fetchUser(username))
+                    , 1000
+                    )
+}
+
+const mapDispatchToProps = dispatch => (
+  { installPolling:  pollingInstaller(dispatch)
+  , requestFollow:   id => dispatch(requestFollow(id))
+  , requestUnfollow: id => dispatch(requestUnfollow(id))
+  }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
