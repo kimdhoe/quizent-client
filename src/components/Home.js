@@ -9,20 +9,32 @@ import { fetchMe, createQuiz } from '../actions/me'
 
 class Home extends React.Component {
   static propTypes = { isUserLoggedIn: React.PropTypes.bool.isRequired
+                     , isFetching:     React.PropTypes.bool.isRequired
+                     , me:             React.PropTypes.object.isRequired
+                     , myQuizzes:      React.PropTypes.array.isRequired
+                     , createQuiz:     React.PropTypes.func.isRequired
+                     , installPolling: React.PropTypes.func.isRequired
                      }
+
+  constructor () {
+    super()
+    this.state = { intervalID: null }
+  }
 
   componentWillMount () {
     if (this.props.isUserLoggedIn)
-      this.props.fetchMe()
+      this.setState({ intervalID: this.props.installPolling() })
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.state.intervalID)
   }
 
   render () {
-    const { me, myQuizzes, isUserLoggedIn, isFetching, quizzes, createQuiz } = this.props
+    const { me, myQuizzes, isUserLoggedIn, isFetching, createQuiz } = this.props
 
     if (!isUserLoggedIn)
-      return (
-        <Greetings />
-      )
+      return <Greetings />
 
     return (
       <div>
@@ -36,9 +48,7 @@ class Home extends React.Component {
 
         <QuizInput createQuiz={createQuiz} />
 
-        <Timeline
-          quizzes={myQuizzes}
-        />
+        <Timeline quizzes={myQuizzes} />
       </div>
     )
   }
@@ -52,4 +62,18 @@ const mapStateToProps = ({ isUserLoggedIn, isFetching, me, myQuizzes }) => (
   }
 )
 
-export default connect(mapStateToProps, { fetchMe, createQuiz })(Home)
+const pollingInstaller = dispatch => () => {
+    dispatch(fetchMe())
+
+    return setInterval( () => dispatch(fetchMe())
+                      , 10000
+                      )
+  }
+
+const mapDispatchToProps = dispatch => (
+  { createQuiz:     quiz => dispatch(createQuiz(quiz))
+  , installPolling: pollingInstaller(dispatch)
+  }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
