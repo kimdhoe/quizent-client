@@ -50,11 +50,11 @@ $gutter: $base-spacing !default;
 $btn-small-font-size: .75em !default;
 $btn-large-font-size: 2em !default;
 
-$btn-default-bg: $inverse-bg-color !default;
-$btn-default-text-color: $inverse-text-color !default;
+$btn-default-bg: transparent;
+$btn-default-text-color: $base-text-color;
 
-$btn-primary-bg: $color-blue !default;
-$btn-primary-text-color: #fff !default;
+$btn-primary-bg: $btn-default-bg;
+$btn-primary-text-color: $color-blue;
 
 // Form Variables
 $field-bg-color: $color-pale-gray !default;

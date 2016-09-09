@@ -3,11 +3,12 @@ import React from 'react'
 import QuizBox from './QuizBox'
 
 class Timeline extends React.Component {
-  static propTypes = { quizzes:    React.PropTypes.array.isRequired
+  static propTypes = { quizzes:      React.PropTypes.array.isRequired
+                     , submitAnswer: React.PropTypes.func.isRequired
                      }
 
   render() {
-    const { quizzes } = this.props
+    const { quizzes, submitAnswer } = this.props
 
     return (
       <div className="Timeline">
@@ -15,7 +16,7 @@ class Timeline extends React.Component {
 
         <div>
           {quizzes.map(quiz =>
-            <QuizBox key={quiz._id} quiz={quiz} />
+            <QuizBox key={quiz._id} quiz={quiz} submitAnswer={submitAnswer} />
           )}
         </div>
       </div>

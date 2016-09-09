@@ -23,7 +23,6 @@ export const fetchUser = username => dispatch => {
 
   axios.get(config.api + '/api/users/' + username)
     .then(res => {
-      console.log(res.data)
       dispatch(receiveUser(res.data.user))
       dispatch(receiveUserQuizzes(res.data.quizzes))
 

@@ -18,3 +18,5 @@ export const FOLLOWED   = 'FOLLOWED'
 export const UNFOLLOWED = 'UNFOLLOWED'
 
 export const RECEIVE_USERS = 'RECEIVE_USERS'
+
+export const RECEIVE_SOLUTION = 'RECEIVE_SOLUTION'

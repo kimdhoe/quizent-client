@@ -6,6 +6,7 @@ import UserBox                 from './UserBox'
 import QuizInput               from './QuizInput'
 import Timeline                from './Timeline'
 import { fetchMe, createQuiz } from '../actions/me'
+import { submitAnswer }        from '../actions/submit'
 
 class Home extends React.Component {
   static propTypes = { isUserLoggedIn: React.PropTypes.bool.isRequired
@@ -14,6 +15,7 @@ class Home extends React.Component {
                      , myQuizzes:      React.PropTypes.array.isRequired
                      , createQuiz:     React.PropTypes.func.isRequired
                      , installPolling: React.PropTypes.func.isRequired
+                     , submitAnswer:   React.PropTypes.func.isRequired
                      }
 
   constructor () {
@@ -31,7 +33,8 @@ class Home extends React.Component {
   }
 
   render () {
-    const { me, myQuizzes, isUserLoggedIn, isFetching, createQuiz } = this.props
+    const { me, myQuizzes, isUserLoggedIn, isFetching
+          , createQuiz, submitAnswer } = this.props
 
     if (!isUserLoggedIn)
       return <Greetings />
@@ -50,9 +53,8 @@ class Home extends React.Component {
           <QuizInput createQuiz={createQuiz} />
         </div>
 
-
         <div className="Grid-cell size-grande-8of12">
-          <Timeline quizzes={myQuizzes} />
+          <Timeline quizzes={myQuizzes} submitAnswer={submitAnswer} />
         </div>
       </div>
     )
@@ -76,7 +78,8 @@ const pollingInstaller = dispatch => () => {
   }
 
 const mapDispatchToProps = dispatch => (
-  { createQuiz:     quiz => dispatch(createQuiz(quiz))
+  { createQuiz:     quiz    => dispatch(createQuiz(quiz))
+  , submitAnswer:   payload => dispatch(submitAnswer(payload))
   , installPolling: pollingInstaller(dispatch)
   }
 )

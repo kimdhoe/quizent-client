@@ -6,6 +6,7 @@ import Timeline            from './Timeline'
 import { fetchUser }       from '../actions/user'
 import { requestFollow
        , requestUnfollow } from '../actions/following'
+import { submitAnswer }    from '../actions/submit'
 
 class Profile extends React.Component {
   static propTypes = { isMe:            React.PropTypes.bool.isRequired
@@ -14,6 +15,7 @@ class Profile extends React.Component {
                      , installPolling:  React.PropTypes.func.isRequired
                      , requestFollow:   React.PropTypes.func.isRequired
                      , requestUnfollow: React.PropTypes.func.isRequired
+                     , submitAnswer:    React.PropTypes.func.isRequired
                      }
 
   constructor () {
@@ -36,7 +38,8 @@ class Profile extends React.Component {
           , user
           , userQuizzes
           , requestUnfollow
-          , requestFollow } = this.props
+          , requestFollow
+          , submitAnswer} = this.props
 
     return (
       <div className="Grid">
@@ -53,9 +56,7 @@ class Profile extends React.Component {
         </div>
 
         <div className="Grid-cell size-grande-8of12">
-          <Timeline
-            quizzes={userQuizzes}
-          />
+          <Timeline quizzes={userQuizzes} submitAnswer={submitAnswer} />
         </div>
       </div>
     )
@@ -83,6 +84,7 @@ const mapDispatchToProps = dispatch => (
   { installPolling:  pollingInstaller(dispatch)
   , requestFollow:   id => dispatch(requestFollow(id))
   , requestUnfollow: id => dispatch(requestUnfollow(id))
+  , submitAnswer:    payload => dispatch(submitAnswer(payload))
   }
 )
 

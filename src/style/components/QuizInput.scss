@@ -1,20 +1,20 @@
-.QuizInput-button {
-  padding: 0;
-  background-color: transparent;
-  color: $color-blue;
-
-  &:hover, &:active {
-    background-color: transparent;
-    color: $color-orange;
-  }
-}
-
-.QuizInput-buttonText {
-  &::before {
-    content: '[[ ';
-  }
-
-  &::after {
-    content: ' ]]';
-  }
-}
+// .QuizInput-button {
+//   padding: 0;
+//   background-color: transparent;
+//   color: $color-blue;
+//
+//   &:hover, &:active {
+//     background-color: transparent;
+//     color: $color-orange;
+//   }
+// }
+//
+// .QuizInput-buttonText {
+//   &::before {
+//     content: '[[ ';
+//   }
+//
+//   &::after {
+//     content: ' ]]';
+//   }
+// }

@@ -1,3 +1,10 @@
 /**
  * STATE
  */
+
+.is-correct {
+  color: $color-green;
+}
+.is-wrong {
+  color: $color-orange;
+}

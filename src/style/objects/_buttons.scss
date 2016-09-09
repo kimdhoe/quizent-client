@@ -12,8 +12,9 @@
     -webkit-appearance: none;
     display: inline-block;
     border: 0;
-    padding: 0.75em 1.4em;
-    background-color: $btn-default-bg;
+    // padding: 0.75em 1.4em;
+    padding: 0;
+    background-color: transparent;
     line-height: 1.2; /* 1 */
     font-family: inherit;
     font-style: inherit;
@@ -24,6 +25,14 @@
     letter-spacing: 1px;
     color: $btn-default-text-color;
     cursor: pointer;
+
+    &::before {
+      content: '[[ ';
+    }
+
+    &::after {
+      content: ' ]]';
+    }
 
     &:hover {
       color: $link-hover-color;
@@ -49,15 +58,12 @@
 .Button--primary {
     background-color: $btn-primary-bg;
     color: $btn-primary-text-color;
+}
 
-    &:hover {
-        background-color: darken($btn-primary-bg, 7%);
-        color: $btn-primary-text-color;
-    }
-
-    &:active {
-        background-color: darken($btn-primary-bg, 15%);
-    }
+.Button--toggle {
+  &::before, &::after {
+    content: none;
+  }
 }
 
 .Button--small { font-size:  0.75em; }

@@ -24,7 +24,7 @@ class FollowButton extends React.Component {
 
     return (
       <button
-        className="FollowButton Button Button--primary"
+        className="FollowButton Button Button--primary Button--toggle"
         onClick={this.onClick}
         disabled={this.state.isLoading}
       >

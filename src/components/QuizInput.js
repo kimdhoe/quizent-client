@@ -1,6 +1,8 @@
  import React      from 'react'
  import classnames from 'classnames'
 
+ import Loading from './Loading'
+
 class QuizInput extends React.Component {
   static propTypes = { createQuiz: React.PropTypes.func.isRequired }
 
@@ -84,7 +86,7 @@ class QuizInput extends React.Component {
               className="QuizInput-button Button Button--primary"
               disabled={this.state.isLoading}
             >
-              <span className="QuizInput-buttonText">Create</span>
+              {this.state.isLoading ? <Loading /> : "Create"}
             </button>
           </form>
         </div>

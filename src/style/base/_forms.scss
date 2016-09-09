@@ -35,7 +35,7 @@ textarea, input[type="text"], input[type="password"], input[type="file"], input[
     color: $base-text-color;
 
     &:focus {
-        border-color: $color-blue;
+        border-bottom-color: $color-blue;
     }
 }
 
