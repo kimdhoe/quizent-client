@@ -25,11 +25,6 @@
     }
 }
 
-/**
- * input field에 대한 도움글
- *
- * 1. 앞에 위치하는 radio/checkbox, label의 float 해제
- */
 .Field-help {
     clear: both; /* 1 */
     margin: $base-spacing / 4 0 0 0;
@@ -37,14 +32,11 @@
     color: $help-text-color;
 }
 
-/**
- * Modifier : 에러 필드
- */
 .Field--error {
-    color: $field-error-color;
+    // color: $field-error-color;
 
-    input {
-        border-color: lighten($field-error-color, 33%);
+    input, textarea {
+        border-color: $color-violet;
     }
 
     .Field-help {

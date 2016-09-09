@@ -53,6 +53,7 @@ export const createQuiz = quiz => dispatch => {
     .catch(err => {
       console.dir(err)
       dispatch(doneFetching())
+      throw err
     })
 }
 

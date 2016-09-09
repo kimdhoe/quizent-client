@@ -25,16 +25,17 @@ label {
  * Text-type inputs
  */
 textarea, input[type="text"], input[type="password"], input[type="file"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-    display: inline-block;
-    width: 100%;
     /* margin-bottom: \$base-spacing; */
+    display: inline-block;
     padding: $base-spacing / 3 $base-spacing / 2;
-    border: 2px solid $field-bg-color;
-    border-radius: 2px;
-    background-color: $field-bg-color;
+    outline: none;
+    border: 1px solid $highlight-bg-color;
+    width: 100%;
+    background-color: $highlight-bg-color;
+    color: $base-text-color;
 
-    &:hover {
-        border-color: darken($field-bg-color, 17%);
+    &:focus {
+        border-color: $color-blue;
     }
 }
 
