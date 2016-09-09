@@ -1,7 +1,6 @@
 .UserBox {
-  background-color: $color-pale-gray;
+  background-color: $base-bg-color;
   margin: $base-spacing 0;
-  padding: $base-spacing / 2 $base-spacing;
 }
 
 .UserBox-names {
@@ -10,10 +9,18 @@
 
 .UserBox-fullname {
   font-weight: $bold-font-weight;
+  color: $emphasized-text-color;
+}
+
+.UserBox-names:hover {
+  .UserBox-fullname {
+    color: $link-hover-color;
+  }
 }
 
 .UserBox-username {
   font-family: monospace;
+  color: $color-cyan;
 }
 
 .UserBox-body {

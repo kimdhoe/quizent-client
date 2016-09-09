@@ -1,14 +1,29 @@
 .FollowButton {
   position: relative;
   overflow: hidden;
-  width: 120px;
+  width: 150px;
   height: $base-spacing * 1.5;
+  background-color: transparent;
+    color: $color-blue;
 
-  * {
-    position: absolute;
-    left:0;
-    right:0;
-    top:0;
-    line-height: $base-spacing * 1.5;
+  &:hover, &:active {
+    background-color: transparent;
+    color: $color-orange;
+  }
+}
+
+.FollowButton-text {
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  line-height: $base-spacing * 1.5;
+
+  &::before {
+    content: '[[ ';
+  }
+
+  &::after {
+    content: ' ]]';
   }
 }

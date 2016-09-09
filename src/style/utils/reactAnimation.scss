@@ -5,7 +5,7 @@
 .buttonText-enter.buttonText-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: all 300ms ease-in;
+  transition: all 400ms ease-out;
 }
 .buttonText-leave {
   opacity: 1;
@@ -14,5 +14,5 @@
 .buttonText-leave.buttonText-leave-active {
   opacity: 0;
   transform: translateY(-50px);
-  transition: all 300ms ease-in;
+  transition: all 400ms ease-out;
 }

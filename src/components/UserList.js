@@ -22,19 +22,24 @@ class UserList extends React.Component {
       <div className="UserList container">
         <h2 className="UserList-title">User List</h2>
 
-        {userList.map(user =>
-          <UserBox
-            key={user._id}
-            isMe={username === user.username}
-            user={user}
-            buttonText={user.followed ? "Unfollow" : "Follow"}
-            toggleFollow={user.followed
-                            ? () => this.props.requestUnfollow(user._id)
-                            : () => this.props.requestFollow(user._id)
-                         }
-          />
-
-        )}
+        <div className="Grid">
+          {userList.map(user =>
+            <div className="Grid-cell size-tall-6of12 size-grande-4of12">
+              <div className="u-border u-boxPad">
+                <UserBox
+                  key={user._id}
+                  isMe={username === user.username}
+                  user={user}
+                  buttonText={user.followed ? "Unfollow" : "Follow"}
+                  toggleFollow={user.followed
+                                  ? () => this.props.requestUnfollow(user._id)
+                                  : () => this.props.requestFollow(user._id)
+                              }
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     )
   }

@@ -1,0 +1,11 @@
+.Main {
+  @include clearfix();
+}
+
+.Main-sidebar {
+  float: left;
+}
+
+.Main-content {
+  float: right;
+}

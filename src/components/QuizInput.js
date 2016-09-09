@@ -38,7 +38,7 @@ class QuizInput extends React.Component {
                 className="QuizInput-questionTextarea"
                 id="questionInput"
                 name="question"
-                rows="2"
+                rows="3"
                 onChange={this.onChange}
                 value={this.state.question}
                 placeholder="Solve this"
@@ -48,10 +48,10 @@ class QuizInput extends React.Component {
 
             <button
               type="submit"
-              className="QuizInput-button Button"
+              className="QuizInput-button Button Button--primary"
               disabled={this.props.isFetching}
             >
-              Create
+              <span className="QuizInput-buttonText">Create</span>
             </button>
           </form>
         </div>

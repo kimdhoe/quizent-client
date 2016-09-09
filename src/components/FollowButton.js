@@ -30,10 +30,10 @@ class FollowButton extends React.Component {
       >
         <ReactCSSTransitionGroup
           transitionName="buttonText"
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={300}
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={400}
         >
-          <span key={buttonText}>{buttonText}</span>
+          <span className="FollowButton-text" key={buttonText}>{buttonText}</span>
         </ReactCSSTransitionGroup>
       </button>
     )

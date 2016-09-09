@@ -16,6 +16,9 @@ legend {
 label {
     display: block;
     margin-bottom: 0.2em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: $small-font-size;
 }
 
 /**

@@ -12,24 +12,33 @@ $base-spacing: $base-font-size * $base-line-height !default;
 
 $base-radius: 3px !default;
 
-$base-bg-color:    #fefefe !default;
+$base-bg-color:      $color-base03 !default;
+$highlight-bg-color: $color-base02 !default;
+$inverse-bg-color:   $color-light-gray !default;
 
-$base-text-color:  $color-mild-black !default;
+$base-text-color:       $color-base0 !default;
+$emphasized-text-color: $color-base1 !default;
+$inverse-text-color:    $color-black !default;
+$muted-text-color:      $color-base01 !default;
+$title-text-color:      $color-blue !default;
+$border-color: $muted-text-color;
+$heading-color: $color-red;
+$accent-color: #eee;
+
+$hr-color:         $color-light-gray !default;
 $help-text-color:  lighten($base-text-color, 15%) !default;
-$muted-text-color: lighten($base-text-color, 30%) !default;
-$hr-color: $color-light-gray !default;
 
-$link-color: $color-red-brown !default;
-$link-hover-color: mix($link-color, white, 75%) !default;
-$link-visited-color: $color-hillary !default;
+$link-color: $color-green !default;
+$link-hover-color: $color-orange !default;
+// $link-visited-color: $color-hillary !default;
 
-$h1-size: 3.157em !default;
-$h2-size: 2.369em !default;
-$h3-size: 1.777em !default;
-$h4-size: 1.333em !default;
+$h1-size: 1.296em !default;
+$h2-size: 1.215em !default;
+$h3-size: 1.138em !default;
+$h4-size: 1.067em !default;
 $h5-size: 1em !default;
-$h6-size: 0.75em !default;
-$small-font-size: 0.8em !default;
+$h6-size: 0.937em !default;
+$small-font-size: 0.937em !default;
 
 $body-font-family: "Source Code Pro", monospace;
 
@@ -41,10 +50,10 @@ $gutter: $base-spacing !default;
 $btn-small-font-size: .75em !default;
 $btn-large-font-size: 2em !default;
 
-$btn-default-bg: $color-pale-gray !default;
-$btn-default-text-color: #444 !default;
+$btn-default-bg: $inverse-bg-color !default;
+$btn-default-text-color: $inverse-text-color !default;
 
-$btn-primary-bg: $color-red-brown !default;
+$btn-primary-bg: $color-blue !default;
 $btn-primary-text-color: #fff !default;
 
 // Form Variables

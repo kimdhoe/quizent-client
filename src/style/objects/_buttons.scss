@@ -12,7 +12,6 @@
     -webkit-appearance: none;
     display: inline-block;
     border: 0;
-    border-radius: $base-radius;
     padding: 0.75em 1.4em;
     background-color: $btn-default-bg;
     line-height: 1.2; /* 1 */
@@ -27,17 +26,14 @@
     cursor: pointer;
 
     &:hover {
-        background-color: darken($btn-default-bg, 7%);
-        color: $btn-default-text-color;
+      color: $link-hover-color;
     }
 
     &:active {
-        background-color: darken($btn-default-bg, 15%);
     }
 
     &.is-disabled,
     &:disabled {
-        background-color: lighten($btn-default-bg, 3%);
         color: $muted-text-color;
         cursor: default;
     }
@@ -46,7 +42,6 @@
     &.is-disabled:active,
     &:disabled:hover,
     &:disabled:active {
-        background-color: lighten($btn-default-bg, 3%);
         color: $muted-text-color;
     }
 }

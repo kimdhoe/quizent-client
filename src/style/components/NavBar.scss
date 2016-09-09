@@ -1,17 +1,21 @@
 .NavBar {
-  background-color: $color-pale-gray;
+  background-color: $base-bg-color;
 
   @include clearfix();
 }
 
 .NavBar-brand {
   float: left;
-  line-height: 50px;
+  line-height: 1.8;
   margin: 0;
-  font-size: $h4-size;
+  font-size: $base-font-size;
 }
 
-.NavBar a {
+.NavBar-brandLink {
+  color: $heading-color;
+}
+
+.NavBar-link {
   color: $base-text-color;
 
   &:hover {
@@ -27,7 +31,7 @@
 
 .NavBar-links {
   float: right;
-  line-height: 50px;
+  line-height: 1.8;
 }
 
 .NavBar-itemList {
@@ -38,7 +42,7 @@
 
 .NavBar-item {
   display: inline-block;
-  padding: 0 0 0 1em;
+  padding: 0 0 0 0.5em;
   list-style-type: none;
   text-align: center;
 }
@@ -46,21 +50,16 @@
 .NavBar-link {
   display: block;
 
-  ::before, ::after {
-    color: transparent;
-    transition: color 150ms ease;
-  }
-
-  ::before {
+  &::before {
     content: '[';
   }
 
-  ::after {
+  &::after {
     content: ']';
   }
 
   &:hover {
-    ::before, ::after {
+    &::before, &::after {
       color: $base-text-color;
     }
   }

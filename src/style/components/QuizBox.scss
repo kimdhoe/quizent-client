@@ -1,7 +1,8 @@
 .QuizBox {
-  background-color: $color-pale-gray;
+  background-color: $base-bg-color;
   margin: $base-spacing 0;
   padding: $base-spacing / 2 $base-spacing;
+  border: 1px solid $border-color;
 }
 
 .QuizBox-names {
@@ -10,18 +11,28 @@
 
 .QuizBox-fullname {
   font-weight: $bold-font-weight;
+  color: $emphasized-text-color;
 }
 
 .QuizBox-username {
   font-family: monospace;
-  color: $base-text-color;
+  color: $color-cyan;
 }
 
-.QuizBox-header > * {
-  margin-right: $base-spacing / 2;
+.QuizBox-names:hover .QuizBox-fullname {
+  color: $link-hover-color;
 }
 
 .QuizBox-timestamp {
+  margin-left: $base-spacing;
   font-family: monospace;
   color: $muted-text-color;
+
+  &::before {
+    content: '(';
+  }
+
+  &::after {
+    content: ')';
+  }
 }

@@ -39,20 +39,24 @@ class Profile extends React.Component {
           , requestFollow } = this.props
 
     return (
-      <div>
-        <UserBox
-          isMe={isMe}
-          user={user}
-          buttonText={user.followed ? "Unfollow" : "Follow"}
-          toggleFollow={user.followed
-                          ? () => this.props.requestUnfollow(user._id)
-                          : () => this.props.requestFollow(user._id)
-                       }
-        />
+      <div className="Grid">
+        <div className="Grid-cell size-grande-4of12">
+          <UserBox
+            isMe={isMe}
+            user={user}
+            buttonText={user.followed ? "Unfollow" : "Follow"}
+            toggleFollow={user.followed
+                            ? () => this.props.requestUnfollow(user._id)
+                            : () => this.props.requestFollow(user._id)
+                        }
+          />
+        </div>
 
-        <Timeline
-          quizzes={userQuizzes}
-        />
+        <div className="Grid-cell size-grande-8of12">
+          <Timeline
+            quizzes={userQuizzes}
+          />
+        </div>
       </div>
     )
   }

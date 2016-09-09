@@ -60,6 +60,8 @@ $base-font-size: 18px;
  */
 @import "utils/clearfix";
 @import "utils/size";
+@import "utils/box";
+@import "utils/spacing";
 $enable-grid-prefix: true;
 @import "utils/prefix";
 $enable-bg-class: true;
@@ -70,8 +72,10 @@ $enable-bg-class: true;
 /**
  * COMPONENTS
  */
+@import "components/Main";
 @import "components/NavBar";
 @import "components/Loader";
+@import "components/QuizInput";
 @import "components/QuizBox";
 @import "components/UserBox";
 @import "components/FollowButton";

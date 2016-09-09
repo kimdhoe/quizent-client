@@ -37,18 +37,23 @@ class Home extends React.Component {
       return <Greetings />
 
     return (
-      <div>
-        <UserBox
-          isFetching={isFetching}
-          isMe={true}
-          user={me}
-          buttonText=""
-          toggleFollow={()=>{}}
-        />
+      <div className="Grid">
+        <div className="Grid-cell size-grande-4of12">
+          <UserBox
+            isFetching={isFetching}
+            isMe={true}
+            user={me}
+            buttonText=""
+            toggleFollow={()=>{}}
+          />
 
-        <QuizInput createQuiz={createQuiz} />
+          <QuizInput createQuiz={createQuiz} />
+        </div>
 
-        <Timeline quizzes={myQuizzes} />
+
+        <div className="Grid-cell size-grande-8of12">
+          <Timeline quizzes={myQuizzes} />
+        </div>
       </div>
     )
   }

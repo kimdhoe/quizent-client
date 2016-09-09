@@ -36,7 +36,7 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
     <header className="NavBar">
       <nav className="container">
         <h1 className="NavBar-brand">
-          <Link to="/" className="NavBar-brandLink"><span>Quizent</span></Link>
+          <Link to="/" className="NavBar-brandLink"><span>quizent</span></Link>
         </h1>
 
         <div className="NavBar-loader">
