@@ -31,9 +31,13 @@ const config =
                            , include: path.join(__dirname, 'src')
                            , loaders: [ 'babel' ]
                            }
+                         , { test:    /\.scss$/
+                           , loaders: ['style', 'css', 'sass']
+                           }
                          ]
               }
   , resolve:  { extensions: [ '', '.js' ] }
+  , sassLoader:  { includePaths: [ path.join(__dirname, 'src/style') ] }
   }
 
 module.exports = config
