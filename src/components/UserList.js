@@ -24,10 +24,12 @@ class UserList extends React.Component {
 
         <div className="Grid">
           {userList.map(user =>
-            <div className="Grid-cell size-tall-6of12 size-grande-4of12">
+            <div
+              key={user._id}
+              className="Grid-cell size-tall-6of12 size-grande-4of12"
+            >
               <div className="u-border u-boxPad">
                 <UserBox
-                  key={user._id}
                   isMe={username === user.username}
                   user={user}
                   buttonText={user.followed ? "Unfollow" : "Follow"}

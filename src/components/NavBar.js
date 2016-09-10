@@ -3,22 +3,40 @@ import { Link } from 'react-router'
 
 import Loader from './Loader'
 
-const NavBar = ({ isUserLoggedIn, isFetching, username, logout }) => {
+// !!!
+// change to class component
+const NavBar = ({ isUserLoggedIn, isFetching, username, logout, showNewQuiz }) => {
   const onClick = e => {
     e.preventDefault()
     logout()
   }
 
+  const onNewQuizClick = e => {
+    e.preventDefault()
+    showNewQuiz()
+  }
+
   const userLinks =
     <ul className="NavBar-itemList">
       <li className="NavBar-item">
-        <Link className="NavBar-link" to="/users"><span>Users</span></Link>
+        <a href="#" onClick={onNewQuizClick} className="NavBar-link">
+          <span>New Quiz</span>
+        </a>
       </li>
       <li className="NavBar-item">
-        <Link className="NavBar-link" to="/me"><strong>{username}</strong></Link>
+        <Link className="NavBar-link" to="/users">
+          <span>Users</span>
+        </Link>
       </li>
       <li className="NavBar-item">
-        <a className="NavBar-link" href="#" onClick={onClick}><span>Logout</span></a>
+        <Link className="NavBar-link" to="/me">
+          <strong>{username}</strong>
+        </Link>
+      </li>
+      <li className="NavBar-item">
+        <a className="NavBar-link" href="#" onClick={onClick}>
+          <span>Logout</span>
+        </a>
       </li>
     </ul>
 
@@ -58,6 +76,7 @@ NavBar.propTypes =
   , isFetching:     React.PropTypes.bool.isRequired
   , username:       React.PropTypes.string
   , logout:         React.PropTypes.func.isRequired
+  , showNewQuiz:    React.PropTypes.func.isRequired
   }
 
 export default NavBar

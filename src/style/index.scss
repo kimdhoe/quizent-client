@@ -30,7 +30,6 @@
  * SETTINGS
  */
 @import "settings/colors";
-$base-font-size: 18px;
 @import "settings/settings";
 @import "settings/mixins";
 @import "settings/responsive";
@@ -75,6 +74,7 @@ $enable-bg-class: true;
  */
 @import "components/Main";
 @import "components/NavBar";
+@import "components/NewQuiz";
 @import "components/Loader";
 @import "components/Loading";
 @import "components/QuizInput";

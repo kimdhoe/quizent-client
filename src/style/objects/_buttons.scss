@@ -26,14 +26,6 @@
     color: $btn-default-text-color;
     cursor: pointer;
 
-    &::before {
-      content: '[[ ';
-    }
-
-    &::after {
-      content: ' ]]';
-    }
-
     &:hover {
       color: $link-hover-color;
     }
