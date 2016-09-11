@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import '../style/index.scss'
 
-import NewQuiz                from './NewQuiz'
+import NewQuiz                from './newQuiz/NewQuiz'
 import NavBarContainer        from '../containers/NavBarContainer'
 import FlashMessagesContainer from '../containers/FlashMessagesContainer'
 

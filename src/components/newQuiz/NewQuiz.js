@@ -11,11 +11,11 @@ import { hideNewQuiz
        , setSolution
        , setIsShortAnswer
        , removeChoice
-       , resetNewQuiz }     from '../actions/newQuiz'
-import { createQuiz }       from '../actions/me'
-import QuizTypeSelection    from './newQuiz/QuizTypeSelection'
-import MultipleChoiceFields from './newQuiz/MultipleChoiceFields'
-import Loading              from './Loading'
+       , resetNewQuiz }     from '../../actions/newQuiz'
+import { createQuiz }       from '../../actions/me'
+import QuizTypeSelection    from './QuizTypeSelection'
+import MultipleChoiceFields from './MultipleChoiceFields'
+import Loading              from '../Loading'
 
 class NewQuiz extends React.Component {
   static propTypes = { newQuiz:          React.PropTypes.object.isRequired
@@ -36,7 +36,6 @@ class NewQuiz extends React.Component {
     this.state = { isLoading: false
                  , errors:    {}
                  }
-
     this.onQuestionChange = this.onQuestionChange.bind(this)
     this.onAnswerChange   = this.onAnswerChange.bind(this)
     this.onChoiceEdit     = this.onChoiceEdit.bind(this)
