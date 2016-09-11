@@ -20,7 +20,7 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout, showNewQuiz }) =
     <ul className="NavBar-itemList">
       <li className="NavBar-item">
         <a href="#" onClick={onNewQuizClick} className="NavBar-link">
-          <span>New Quiz</span>
+          <span>[New Quiz]</span>
         </a>
       </li>
       <li className="NavBar-item">

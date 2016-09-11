@@ -5,16 +5,6 @@
 $grid-vertical-spacing: $base-spacing !default;
 
 /**
- * @Todo
- *
- * Add a variable that controls the whitespace between inline-block elements.
- * So that authors can toggle the font-size hack.
- * Recommend to remove whitespaces from markup.
- * $whitespace-hack: false !default;
- *
-
-
-/**
  * .container는 내용을 가운데로 정렬하고, 최대 너비를 제한한다.
  */
 .container {

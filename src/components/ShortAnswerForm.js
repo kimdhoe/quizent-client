@@ -1,12 +1,10 @@
 import React from 'react'
 
-import Loading from './Loading'
-
-const QuizSubmitForm = ({ value, placeholder, isLoading, onChange, onSubmit }) =>
-  <form onSubmit={onSubmit} className="QuizSubmitForm">
-    <div className="QuizSubmitForm-answer">
+const ShortAnswerForm = ({ value, placeholder, isLoading, onChange, onSubmit }) =>
+  <form onSubmit={onSubmit} className="ShortAnswerForm">
+    <div className="ShortAnswerForm-answer">
       <input
-        className="QuizSubmitForm-answerInput"
+        className="ShortAnswerForm-answerInput"
         type="text"
         placeholder={placeholder}
         value={value}
@@ -14,18 +12,18 @@ const QuizSubmitForm = ({ value, placeholder, isLoading, onChange, onSubmit }) =
       />
     </div>
 
-    <div className="QuizSubmitForm-answerSubmit">
+    <div className="ShortAnswerForm-answerSubmit">
       <button
-        className={"QuizSubmitForm-button Button Button--primary"}
+        className={"ShortAnswerForm-button Button Button--primary"}
         type="submit"
         disabled={isLoading}
       >
-        {isLoading ?  <Loading /> : "Submit"}
+        Submit
       </button>
     </div>
   </form>
 
-QuizSubmitForm.propTypes =
+ShortAnswerForm.propTypes =
   { value:       React.PropTypes.string.isRequired
   , placeholder: React.PropTypes.string.isRequired
   , isLoading:   React.PropTypes.bool.isRequired
@@ -33,4 +31,4 @@ QuizSubmitForm.propTypes =
   , onSubmit:    React.PropTypes.func.isRequired
   }
 
-export default QuizSubmitForm
+export default ShortAnswerForm

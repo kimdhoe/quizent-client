@@ -80,7 +80,9 @@ $enable-bg-class: true;
 @import "components/Loading";
 @import "components/QuizInput";
 @import "components/QuizBox";
-@import "components/QuizSubmitForm";
+@import "components/ShortAnswerForm";
+@import "components/MultipleChoiceForm";
+@import "components/GradeBox";
 @import "components/UserBox";
 @import "components/FollowButton";
 

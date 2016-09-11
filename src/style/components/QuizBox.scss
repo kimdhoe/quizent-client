@@ -1,34 +1,25 @@
 .QuizBox {
-  margin: 0 0 $base-spacing * 2 0;
-  border: 1px solid $border-color;
+  margin: $base-spacing * 2 0 $base-spacing * 2 0;
+  padding-top: $base-spacing;
+  border-top: 1px dashed $border-color;
   background-color: $base-bg-color;
 }
 
 .QuizBox-header {
+  position: relative;  /* to position loader absolutely */
   padding: $base-spacing / 2;
-  border-bottom: 1px solid $border-color;
+  text-align: right;
   font-size: $small-font-size;
 }
 
-.QuizBox-body {
-}
-
-.QuizBox-question {
-  margin: 0;
-  padding: $base-spacing /2;
-}
-
-.QuizBox-grade {
+.QuizBox-footer {
   padding: $base-spacing / 2;
-  min-height: 53px;
+  padding-bottom: 0;
+  min-height: 60px;
 }
 
-.QuizBox-gradeText {
-  margin-bottom: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: $small-font-size;
-  font-weight: $bold-font-weight;
+.QuizBox-loader {
+  position: absolute;
 }
 
 .QuizBox-names {
@@ -36,7 +27,6 @@
 }
 
 .QuizBox-fullname {
-  font-weight: $bold-font-weight;
   color: $emphasized-text-color;
 }
 
@@ -53,12 +43,9 @@
   margin-left: $base-spacing;
   font-family: monospace;
   color: $muted-text-color;
+}
 
-  &::before {
-    content: '(';
-  }
-
-  &::after {
-    content: ')';
-  }
+.QuizBox-question {
+  margin: 0;
+  padding: $base-spacing /2;
 }

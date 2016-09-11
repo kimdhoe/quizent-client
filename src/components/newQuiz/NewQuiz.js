@@ -127,9 +127,9 @@ class NewQuiz extends React.Component {
                   </div>
                 </div>
 
-                <div className="NewQuiz-shortAnswer">
+                <div className="NewQuiz-answer">
                   {newQuiz.isShortAnswer
-                    ? <div className={`NewQuiz-answer Field ${errors.question ? "Field--error" : ""}`}>
+                    ? <div className={`NewQuiz-shortAnswer Field ${errors.question ? "Field--error" : ""}`}>
                         <input
                           type="text"
                           placeholder="answer"

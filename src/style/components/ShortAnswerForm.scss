@@ -1,0 +1,16 @@
+.ShortAnswerForm {
+  @include clearfix();
+}
+
+.ShortAnswerForm-answer {
+  float: left;
+  width: 100%;
+  margin-right: -90px;
+  padding-right: 90px;
+}
+
+.ShortAnswerForm-answerSubmit {
+  float: right;
+  padding: $base-spacing / 3;
+  width: 80px;
+}

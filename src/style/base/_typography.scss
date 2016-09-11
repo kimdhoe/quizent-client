@@ -47,10 +47,6 @@ a {
     color: $link-color;
     text-decoration: none;
 
-    &, & * {
-      transition: color 100ms ease-out;
-    }
-
     &:hover {
       color: $link-hover-color;
     }
