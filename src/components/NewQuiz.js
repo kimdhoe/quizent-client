@@ -1,6 +1,7 @@
-import React       from 'react'
-import { connect } from 'react-redux'
-import classnames  from 'classnames'
+import React                   from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { connect }             from 'react-redux'
+import classnames              from 'classnames'
 
 import { hideNewQuiz
        , setQuestion
@@ -14,6 +15,7 @@ import { hideNewQuiz
 import { createQuiz }       from '../actions/me'
 import QuizTypeSelection    from './newQuiz/QuizTypeSelection'
 import MultipleChoiceFields from './newQuiz/MultipleChoiceFields'
+import Loading              from './Loading'
 
 class NewQuiz extends React.Component {
   static propTypes = { newQuiz:          React.PropTypes.object.isRequired
@@ -31,6 +33,9 @@ class NewQuiz extends React.Component {
 
   constructor () {
     super()
+    this.state = { isLoading: false
+                 , errors:    {}
+                 }
 
     this.onQuestionChange = this.onQuestionChange.bind(this)
     this.onAnswerChange   = this.onAnswerChange.bind(this)
@@ -42,46 +47,22 @@ class NewQuiz extends React.Component {
     this.onReset          = this.onReset.bind(this)
   }
 
-  onCloseClick (e) {
-    this.props.hideNewQuiz()
-  }
-
-  onQuestionChange (e) {
-    this.props.setQuestion(e.target.value)
-  }
-
-  onAnswerChange (e) {
-    this.props.setAnswer(e.target.value)
-  }
-
-  onChoiceEdit (e, index) {
-    this.props.setChoice(e.target.value, index)
-  }
-
-  onChoiceRemove (e, index) {
-    this.props.removeChoice(index)
-  }
-
-  onNewChoice () {
-    this.props.addNewChoice()
-  }
-
-  onSolutionChange (e) {
-    this.props.setSolution(Number(e.target.value))
-  }
-
-  onTypeSelect (isShortAnswer) {
-    this.props.setIsShortAnswer(isShortAnswer)
-  }
+  onCloseClick     (e)             { this.props.hideNewQuiz() }
+  onQuestionChange (e)             { this.props.setQuestion(e.target.value) }
+  onAnswerChange   (e)             { this.props.setAnswer(e.target.value) }
+  onChoiceEdit     (e, index)      { this.props.setChoice(e.target.value, index) }
+  onChoiceRemove   (e, index)      { this.props.removeChoice(index) }
+  onNewChoice      ()              { this.props.addNewChoice() }
+  onSolutionChange (e)             { this.props.setSolution(Number(e.target.value)) }
+  onTypeSelect     (isShortAnswer) { this.props.setIsShortAnswer(isShortAnswer) }
 
   onReset () {
+    this.setState({ errors: {} })
     this.props.resetNewQuiz()
   }
 
-  onSubmit (e) {
-    e.preventDefault()
-
-    // set isLoading state.
+  onSubmit (e) { e.preventDefault() 
+    this.setState({ isLoading: true })
 
     const { isShortAnswer, question, answer, choices, solutionIndex } = this.props.newQuiz
 
@@ -94,32 +75,24 @@ class NewQuiz extends React.Component {
     }
     else {
       payload.choices = choices.filter(choice => choice.trim())
-      payload.answer  = choices[solutionIndex].trim()
+      payload.answer  = solutionIndex >= 0 ? choices[solutionIndex].trim() : ''
     }
 
     this.props.createQuiz(payload)
-    .then(res => {
-      console.log(res)
-      this.props.hideNewQuiz()
-    })
-
-    // if short answer, send question, answer, empty array and -1.
-    //
-    // validation:
-    //   - if short-answer:
-    //     - question, answer (not null)
-    //   - if multiple-choice:
-    //     - question (not null)
-    //     - !isEmpty(choices)
-    //     - solutionIndex >= 0
-    //
-    // on success:
-    //   - clear all fields.
-    //   - set isLoading state.
+      .then(res => {
+        console.log(res)
+        this.setState({ isLoading: false })
+        this.props.hideNewQuiz()
+        this.props.resetNewQuiz()
+      })
+      .catch(err => {
+        this.setState({ errors: err.response.data.errors, isLoading: false})
+      })
   }
 
   render() {
     const { newQuiz } = this.props
+    const { errors } = this.state
 
     return (
       <div className="NewQuiz">
@@ -140,29 +113,42 @@ class NewQuiz extends React.Component {
               />
 
               <form className="NewQuiz-form">
-                <div className="NewQuiz-question Field">
+                <div className={`NewQuiz-question Field ${errors.question ? "Field--error" : ""}`}>
                   <input
                     type="text"
                     placeholder="question"
                     value={newQuiz.question}
                     onChange={this.onQuestionChange}
                   />
+
+                  <div className="HelpBlock">
+                    {this.state.errors.question &&
+                      <p>{this.state.errors.question}</p>
+                    }
+                  </div>
                 </div>
 
                 <div className="NewQuiz-shortAnswer">
                   {newQuiz.isShortAnswer
-                    ? <div className="NewQuiz-answer Field">
+                    ? <div className={`NewQuiz-answer Field ${errors.question ? "Field--error" : ""}`}>
                         <input
                           type="text"
                           placeholder="answer"
                           value={newQuiz.answer}
                           onChange={this.onAnswerChange}
                         />
+
+                        <div className="HelpBlock">
+                          {this.state.errors.answer &&
+                            <p>{this.state.errors.answer}</p>
+                          }
+                        </div>
                       </div>
 
                     : <MultipleChoiceFields
                         choices={newQuiz.choices}
                         solutionIndex={newQuiz.solutionIndex}
+                        errors={this.state.errors}
                         handleNewChoice={this.onNewChoice}
                         handleChoiceEdit={this.onChoiceEdit}
                         handleChoiceRemove={this.onChoiceRemove}
@@ -184,8 +170,9 @@ class NewQuiz extends React.Component {
                     className="NewQuiz-submitButton Button Button--primary"
                     type="button"
                     onClick={this.onSubmit}
+                    disabled={this.state.isLoading}
                   >
-                    Create
+                    {this.state.isLoading ?  <Loading /> : "Create"}
                   </button>
                 </div>
               </form>

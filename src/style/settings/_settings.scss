@@ -58,7 +58,7 @@ $btn-primary-text-color: $color-blue;
 
 // Form Variables
 $field-bg-color: $color-pale-gray !default;
-$field-error-color: red !default;
+$field-error-color: $color-red !default;
 $field-required-color: red !default;
 
 // Icon Variables
@@ -67,7 +67,7 @@ $icon-border-color: #ccc;
 
 // Feedback Variabels
 $information-color: #439ccf;
-$error-color: #e72915;
+$error-color: $color-red;
 $warning-color: #d35400;
 $success-color: #74a730;
 

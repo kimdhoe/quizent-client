@@ -4,6 +4,7 @@ import Choice from './Choice'
 
 const MultipleChoiceFields = ({ choices
                               , solutionIndex
+                              , errors
                               , handleNewChoice
                               , handleChoiceEdit
                               , handleSolutionChange
@@ -28,6 +29,11 @@ const MultipleChoiceFields = ({ choices
         />
       )}
     </div>
+
+    <div className="HelpBlock">
+      {errors.choices  && <p className="HelpBlock-text">{errors.choices}</p>}
+      {errors.solution && <p className="HelpBlock-text">{errors.solution}</p>}
+    </div>
   </div>
 
- export default MultipleChoiceFields
+export default MultipleChoiceFields

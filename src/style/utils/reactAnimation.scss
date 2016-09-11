@@ -16,3 +16,31 @@
   transform: translateY(-50px);
   transition: all 400ms ease-out;
 }
+
+.modal-appear {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.modal-appear.modal-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 400ms ease-out;
+}
+.modal-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.modal-enter.modal-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 400ms ease-out;
+}
+.modal-leave {
+  opacity: 1;
+  transform: translateY(0);
+}
+.modal-leave.modal-leave-active {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: all 400ms ease-out;
+}

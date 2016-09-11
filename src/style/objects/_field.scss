@@ -1,47 +1,45 @@
 /* ==========================================================================
-   #FIELD / OBJECTS
-   ========================================================================== */
+#FIELD / OBJECTS
+========================================================================== */
 
 /**
  * 1. Radio/checkbox는 label과 한 줄로 정렬시킨다.
  */
 .Field {
-    @include clearfix; /* 1 */
+  @include clearfix; /* 1 */
 
-    margin-bottom: $base-spacing / 2;
+  margin-bottom: $base-spacing / 2;
 
 
-    input[type="radio"],
-    input[type="checkbox"],
-    label {
-        float: left; /* 1 */
-        line-height: 1; /* 1 */
-        margin: 0 $base-spacing / 2 $base-spacing / 2 0;
-    }
+  input[type="radio"],
+  input[type="checkbox"],
+  label {
+    float: left; /* 1 */
+    line-height: 1; /* 1 */
+    margin: 0 $base-spacing / 2 $base-spacing / 2 0;
+  }
 
-    input[type="radio"],
-    input[type="checkbox"] {
-        clear: both; /* 1 */
-    }
+  input[type="radio"],
+  input[type="checkbox"] {
+    clear: both; /* 1 */
+  }
 }
 
 .Field-help {
-    clear: both; /* 1 */
-    margin: $base-spacing / 4 0 0 0;
-    font-size: 0.75em;
-    color: $help-text-color;
+  clear: both; /* 1 */
+  margin: $base-spacing / 4 0 0 0;
+  font-size: 0.9em;
+  color: $help-text-color;
 }
 
 .Field--error {
-    // color: $field-error-color;
+  input, textarea {
+    // border-color: $field-error-color;
+  }
 
-    input, textarea {
-        border-color: $color-violet;
-    }
-
-    .Field-help {
-        color: $field-error-color;
-    }
+  .Field-help {
+    color: $field-error-color;
+  }
 }
 
 .SingleFieldForm-button {

@@ -25,7 +25,7 @@
 
 .NewQuiz-title {
   margin-top: 0;
-  padding: 1em;
+  padding: 0 1em;
   text-align: center;
 }
 
@@ -68,11 +68,20 @@
   color: $muted-text-color;
 }
 
+.NewQuiz-form {
+  .HelpBlock {
+    height: 30px;
+  }
+}
 
 // Multiple-choice
+.NewQuiz-choices {
+
+}
+
 .NewQuiz-choice {
   position: relative;
-  margin: 1em 0;
+  margin-bottom: 0.4em;
   background-color: $highlight-bg-color;
   height: 40px;
 }
@@ -130,5 +139,6 @@
 .NewQuiz-resetButton, .NewQuiz-submitButton {
   margin-left: $base-spacing;
   padding: 0.5em;
+  width: 70px;
 }
 
