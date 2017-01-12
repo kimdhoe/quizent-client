@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 
 import UserBox             from './UserBox'
 import Timeline            from './Timeline'
-import { fetchUser }       from '../actions/user'
+import { fetchUser
+       , checkLatestUserQuizzes
+       , fetchLatestUserQuizzes
+       }                   from '../actions/user'
 import { requestFollow
        , requestUnfollow } from '../actions/following'
 import { submitAnswer }    from '../actions/submit'
@@ -14,7 +17,7 @@ class Profile extends React.Component {
                      , user:            React.PropTypes.object.isRequired
                      , username:        React.PropTypes.string.isRequired
                      , userQuizzes:     React.PropTypes.array.isRequired
-                     , installPolling:  React.PropTypes.func.isRequired
+                     , fetchUser:       React.PropTypes.func.isRequired
                      , requestFollow:   React.PropTypes.func.isRequired
                      , requestUnfollow: React.PropTypes.func.isRequired
                      , handleDelete:    React.PropTypes.func.isRequired
@@ -23,17 +26,46 @@ class Profile extends React.Component {
 
   constructor () {
     super()
-    this.state = { intervalID: null }
+    this.state = { intervalID:  null
+                 , username:    ''
+                 , lastDate:    ''
+                 , nNewQuizzes: 0
+                 }
   }
 
-  componentWillMount () {
-    const intervalID = this.props.installPolling(this.props.params.username)
+  componentDidMount () {
+    this.props.fetchUser(this.props.params.username)
+      .then(({ user, quizzes }) => {
+        this.setState({ username: user.username
+                      , lastDate: quizzes[0].createdAt
+                      }
+                     )
+      })
 
-    this.setState({ intervalID: intervalID })
+    const check = () => {
+      this.props.checkLatestUserQuizzes(this.state)
+        .then(({ nNewQuizzes }) => {
+          this.setState({ nNewQuizzes })
+        })
+    }
+
+    const intervalID = setInterval(check, 5000)
+
+    this.setState({ intervalID })
   }
 
   componentWillUnmount () {
     clearInterval(this.state.intervalID)
+  }
+
+  handleUnseenQuizzesClick () {
+    this.props.fetchLatestUserQuizzes(this.state)
+      .then(({ quizzes }) => {
+        this.setState({ nNewQuizzes: 0
+                      , lastDate:    quizzes[0].createdAt
+                      }
+                     )
+      })
   }
 
   render () {
@@ -64,7 +96,9 @@ class Profile extends React.Component {
           <Timeline
             username={username}
             quizzes={userQuizzes}
+            nNewQuizzes={this.state.nNewQuizzes}
             handleDelete={handleDelete}
+            handleUnseenQuizzesClick={this.handleUnseenQuizzesClick.bind(this)}
             submitAnswer={submitAnswer}
           />
         </div>
@@ -81,22 +115,14 @@ const mapStateToProps = ({ username, user, userQuizzes }) => (
   }
 )
 
-// Given a Redux dispatch function, produces a user-polling installer
-// procedure, which returns an interval-ID for clearing on unmounting.
-const pollingInstaller = dispatch => username => {
-  dispatch(fetchUser(username))
-
-  return setInterval( () => dispatch(fetchUser(username))
-                    , 20000
-                    )
-}
-
 const mapDispatchToProps = dispatch => (
-  { installPolling:  pollingInstaller(dispatch)
-  , requestFollow:   id => dispatch(requestFollow(id))
-  , requestUnfollow: id => dispatch(requestUnfollow(id))
-  , handleDelete:    id => dispatch(deleteQuiz(id))
-  , submitAnswer:    payload => dispatch(submitAnswer(payload))
+  { requestFollow:          id => dispatch(requestFollow(id))
+  , requestUnfollow:        id => dispatch(requestUnfollow(id))
+  , handleDelete:           id => dispatch(deleteQuiz(id))
+  , submitAnswer:           payload => dispatch(submitAnswer(payload))
+  , fetchUser:              username => dispatch(fetchUser(username))
+  , checkLatestUserQuizzes: state => dispatch(checkLatestUserQuizzes(state))
+  , fetchLatestUserQuizzes: state => dispatch(fetchLatestUserQuizzes(state))
   }
 )
 
