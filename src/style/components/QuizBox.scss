@@ -1,13 +1,12 @@
 .QuizBox {
   margin: $base-spacing * 2 0 $base-spacing * 2 0;
-  padding-top: $base-spacing;
   border-top: 1px dashed $border-color;
   background-color: $base-bg-color;
 }
 
 .QuizBox-header {
   position: relative;  /* to position loader absolutely */
-  padding: $base-spacing / 2;
+  padding: $base-spacing / 4 $base-spacing / 2;
   text-align: right;
   font-size: $small-font-size;
 }

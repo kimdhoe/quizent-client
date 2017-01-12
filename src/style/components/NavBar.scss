@@ -15,14 +15,6 @@
   color: $heading-color;
 }
 
-.NavBar-link {
-  color: $base-text-color;
-
-  &:hover {
-    text-decoration: none;
-  }
-}
-
 .NavBar-loader {
   float: left;
   margin: 0 0 0 0.5em;
@@ -48,5 +40,13 @@
 }
 
 .NavBar-link {
-  display: block;
+  // display: block;
+}
+
+.NavBar-link {
+  color: $base-text-color;
+}
+
+.NavBar-primaryLink {
+  color: $btn-primary-text-color;
 }

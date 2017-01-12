@@ -3,7 +3,7 @@ import React from 'react'
 import FlashMessage from './FlashMessage'
 
 const FlashMessages = ({ messages, removeFlashMessage }) =>
-  <div>
+  <div className="FlashMessages">
     {messages.map(message =>
       <FlashMessage
         key={message.id}

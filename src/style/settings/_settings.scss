@@ -44,7 +44,7 @@ $body-font-family: "Source Code Pro", monospace;
 
 // Grid Variables
 $column-count: 12 !default;
-$gutter: $base-spacing !default;
+$gutter: $base-spacing * 1.5 !default;
 
 // Button Variables
 $btn-small-font-size: .8em !default;

@@ -20,7 +20,7 @@ class UserList extends React.Component {
 
     return (
       <div className="UserList container">
-        <h2 className="UserList-title">User List</h2>
+        <h2 className="UserList-title">Random User List</h2>
 
         <div className="Grid">
           {userList.map(user =>

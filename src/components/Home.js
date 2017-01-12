@@ -73,7 +73,7 @@ const pollingInstaller = dispatch => () => {
     dispatch(fetchMe())
 
     return setInterval( () => dispatch(fetchMe())
-                      , 10000
+                      , 20000
                       )
   }
 

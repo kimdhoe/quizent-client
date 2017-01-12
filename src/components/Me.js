@@ -1,16 +1,15 @@
 import React       from 'react'
 import { connect } from 'react-redux'
 
-import UserBox             from './UserBox'
-import Timeline            from './Timeline'
-import { fetchUser }       from '../actions/user'
-import { requestFollow
-       , requestUnfollow } from '../actions/following'
-import { submitAnswer }    from '../actions/submit'
+import UserBox          from './UserBox'
+import Timeline         from './Timeline'
+import { fetchUser }    from '../actions/user'
+import { submitAnswer } from '../actions/submit'
 
-class Profile extends React.Component {
+class Me extends React.PureComponent {
   static propTypes = { isMe:            React.PropTypes.bool.isRequired
                      , user:            React.PropTypes.object.isRequired
+                     , username:        React.PropTypes.string.isRequired
                      , userQuizzes:     React.PropTypes.array.isRequired
                      , installPolling:  React.PropTypes.func.isRequired
                      , requestFollow:   React.PropTypes.func.isRequired
@@ -23,10 +22,10 @@ class Profile extends React.Component {
     this.state = { intervalID: null }
   }
 
-  componentWillMount () {
-    const intervalID = this.props.installPolling(this.props.params.username)
+  componentDidMount () {
+    const intervalID = this.props.installPolling(this.props.username)
 
-    this.setState({ intervalID: intervalID })
+    this.setState({ intervalID })
   }
 
   componentWillUnmount () {
@@ -37,8 +36,8 @@ class Profile extends React.Component {
     const { isMe
           , user
           , userQuizzes
-          , requestUnfollow
           , requestFollow
+          , requestUnfollow
           , submitAnswer } = this.props
 
     return (
@@ -47,16 +46,16 @@ class Profile extends React.Component {
           <UserBox
             isMe={isMe}
             user={user}
-            buttonText={user.followed ? "Unfollow" : "Follow"}
-            toggleFollow={user.followed
-                            ? () => this.props.requestUnfollow(user._id)
-                            : () => this.props.requestFollow(user._id)
-                         }
+            buttonText=''
+            toggleFollow={requestFollow}
           />
         </div>
 
         <div className="Grid-cell size-grande-8of12">
-          <Timeline quizzes={userQuizzes} submitAnswer={submitAnswer} />
+          <Timeline
+            quizzes={userQuizzes}
+            submitAnswer={submitAnswer}
+          />
         </div>
       </div>
     )
@@ -66,12 +65,11 @@ class Profile extends React.Component {
 const mapStateToProps = ({ username, user, userQuizzes }) => (
   { isMe: username === user.username
   , user
+  , username
   , userQuizzes
   }
 )
 
-// Given a Redux dispatch function, produces a user-polling installer
-// procedure, which returns an interval-ID for clearing on unmounting.
 const pollingInstaller = dispatch => username => {
   dispatch(fetchUser(username))
 
@@ -80,12 +78,14 @@ const pollingInstaller = dispatch => username => {
                     )
 }
 
+const noop = () => {}
+
 const mapDispatchToProps = dispatch => (
   { installPolling:  pollingInstaller(dispatch)
-  , requestFollow:   id => dispatch(requestFollow(id))
-  , requestUnfollow: id => dispatch(requestUnfollow(id))
+  , requestFollow:   noop
+  , requestUnfollow: noop
   , submitAnswer:    payload => dispatch(submitAnswer(payload))
   }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Me)

@@ -6,6 +6,7 @@ import App               from './components/App'
 import Home              from './components/Home'
 import SignupPage        from './components/SignupPage'
 import LoginPage         from './components/LoginPage'
+import Me                from './components/Me'
 import Profile           from './components/Profile'
 import UserListContainer from './containers/UserListContainer'
 import requireAuth       from './utils/requireAuth'
@@ -20,6 +21,7 @@ const routes =
     <Route path="users"         component={UserListContainer} />
 
     <Route path="user/:username" component={Profile} />
+    <Route path="me" component={Me}/>
   </Route>
 
 export default routes
