@@ -1,12 +1,13 @@
 # todos
 
 [x] new quiz validation
+[x] my page
+[x] delete quiz
 [ ] user profile
 [x] layout...sidebar
-[x] theme...solarized?
 [x] write real quiz feature
-[ ] Change name: QuizUp, QuizApp, PopQuiz, QuizPop
-[ ] try example QuizUp timeline.
+[ ] Change name?: QuizUp, QuizApp, PopQuiz, QuizPop
+[ ] tryout timeline
 [ ] login, signup form
 [ ] allow multiple answers for short-answer quiz.
 [ ] make grading case-insensitive by default.

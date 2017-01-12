@@ -5,6 +5,7 @@ import UserBox          from './UserBox'
 import Timeline         from './Timeline'
 import { fetchUser }    from '../actions/user'
 import { submitAnswer } from '../actions/submit'
+import { deleteQuiz }   from '../actions/quiz'
 
 class Me extends React.PureComponent {
   static propTypes = { isMe:            React.PropTypes.bool.isRequired
@@ -14,6 +15,7 @@ class Me extends React.PureComponent {
                      , installPolling:  React.PropTypes.func.isRequired
                      , requestFollow:   React.PropTypes.func.isRequired
                      , requestUnfollow: React.PropTypes.func.isRequired
+                     , handleDelete:    React.PropTypes.func.isRequired
                      , submitAnswer:    React.PropTypes.func.isRequired
                      }
 
@@ -35,9 +37,11 @@ class Me extends React.PureComponent {
   render () {
     const { isMe
           , user
+          , username
           , userQuizzes
           , requestFollow
           , requestUnfollow
+          , handleDelete
           , submitAnswer } = this.props
 
     return (
@@ -53,7 +57,9 @@ class Me extends React.PureComponent {
 
         <div className="Grid-cell size-grande-8of12">
           <Timeline
+            username={username}
             quizzes={userQuizzes}
+            handleDelete={handleDelete}
             submitAnswer={submitAnswer}
           />
         </div>
@@ -84,6 +90,7 @@ const mapDispatchToProps = dispatch => (
   { installPolling:  pollingInstaller(dispatch)
   , requestFollow:   noop
   , requestUnfollow: noop
+  , handleDelete:    id => dispatch(deleteQuiz(id))
   , submitAnswer:    payload => dispatch(submitAnswer(payload))
   }
 )

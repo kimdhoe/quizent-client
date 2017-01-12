@@ -7,14 +7,17 @@ import QuizInput               from './QuizInput'
 import Timeline                from './Timeline'
 import { fetchMe, createQuiz } from '../actions/me'
 import { submitAnswer }        from '../actions/submit'
+import { deleteQuiz }          from '../actions/quiz'
 
 class Home extends React.Component {
   static propTypes = { isUserLoggedIn: React.PropTypes.bool.isRequired
                      , isFetching:     React.PropTypes.bool.isRequired
                      , me:             React.PropTypes.object.isRequired
                      , myQuizzes:      React.PropTypes.array.isRequired
+                     , username:       React.PropTypes.string.isRequired
                      , createQuiz:     React.PropTypes.func.isRequired
                      , installPolling: React.PropTypes.func.isRequired
+                     , handleDelete:   React.PropTypes.func.isRequired
                      , submitAnswer:   React.PropTypes.func.isRequired
                      }
 
@@ -34,7 +37,7 @@ class Home extends React.Component {
 
   render () {
     const { me, myQuizzes, isUserLoggedIn, isFetching
-          , createQuiz, submitAnswer } = this.props
+          , createQuiz, handleDelete, submitAnswer, username } = this.props
 
     if (!isUserLoggedIn)
       return <Greetings />
@@ -54,18 +57,24 @@ class Home extends React.Component {
         </div>
 
         <div className="Grid-cell size-grande-8of12">
-          <Timeline quizzes={myQuizzes} submitAnswer={submitAnswer} />
+          <Timeline
+            username={username}
+            quizzes={myQuizzes}
+            handleDelete={handleDelete}
+            submitAnswer={submitAnswer}
+          />
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ isUserLoggedIn, isFetching, me, myQuizzes }) => (
+const mapStateToProps = ({ isUserLoggedIn, isFetching, me, myQuizzes, username }) => (
   { isUserLoggedIn
   , isFetching
   , me
   , myQuizzes
+  , username
   }
 )
 
@@ -79,6 +88,7 @@ const pollingInstaller = dispatch => () => {
 
 const mapDispatchToProps = dispatch => (
   { createQuiz:     quiz    => dispatch(createQuiz(quiz))
+  , handleDelete:   id      => dispatch(deleteQuiz(id))
   , submitAnswer:   payload => dispatch(submitAnswer(payload))
   , installPolling: pollingInstaller(dispatch)
   }

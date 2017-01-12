@@ -36,7 +36,7 @@ class UserList extends React.Component {
                   toggleFollow={user.followed
                                   ? () => this.props.requestUnfollow(user._id)
                                   : () => this.props.requestFollow(user._id)
-                              }
+                               }
                 />
               </div>
             </div>

@@ -7,14 +7,17 @@ import { fetchUser }       from '../actions/user'
 import { requestFollow
        , requestUnfollow } from '../actions/following'
 import { submitAnswer }    from '../actions/submit'
+import { deleteQuiz }      from '../actions/quiz'
 
 class Profile extends React.Component {
   static propTypes = { isMe:            React.PropTypes.bool.isRequired
                      , user:            React.PropTypes.object.isRequired
+                     , username:        React.PropTypes.string.isRequired
                      , userQuizzes:     React.PropTypes.array.isRequired
                      , installPolling:  React.PropTypes.func.isRequired
                      , requestFollow:   React.PropTypes.func.isRequired
                      , requestUnfollow: React.PropTypes.func.isRequired
+                     , handleDelete:    React.PropTypes.func.isRequired
                      , submitAnswer:    React.PropTypes.func.isRequired
                      }
 
@@ -36,9 +39,11 @@ class Profile extends React.Component {
   render () {
     const { isMe
           , user
+          , username
           , userQuizzes
           , requestUnfollow
           , requestFollow
+          , handleDelete
           , submitAnswer } = this.props
 
     return (
@@ -56,7 +61,12 @@ class Profile extends React.Component {
         </div>
 
         <div className="Grid-cell size-grande-8of12">
-          <Timeline quizzes={userQuizzes} submitAnswer={submitAnswer} />
+          <Timeline
+            username={username}
+            quizzes={userQuizzes}
+            handleDelete={handleDelete}
+            submitAnswer={submitAnswer}
+          />
         </div>
       </div>
     )
@@ -66,6 +76,7 @@ class Profile extends React.Component {
 const mapStateToProps = ({ username, user, userQuizzes }) => (
   { isMe: username === user.username
   , user
+  , username
   , userQuizzes
   }
 )
@@ -84,6 +95,7 @@ const mapDispatchToProps = dispatch => (
   { installPolling:  pollingInstaller(dispatch)
   , requestFollow:   id => dispatch(requestFollow(id))
   , requestUnfollow: id => dispatch(requestUnfollow(id))
+  , handleDelete:    id => dispatch(deleteQuiz(id))
   , submitAnswer:    payload => dispatch(submitAnswer(payload))
   }
 )

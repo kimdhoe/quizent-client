@@ -31,3 +31,5 @@ export const REMOVE_CHOICE       = 'REMOVE_CHOICE'
 export const SET_SOLUTION        = 'SET_SOLUTION'
 export const SET_IS_SHORT_ANSWER = 'SET_IS_SHORT_ANSWER'
 export const RESET_NEW_QUIZ      = 'RESET_NEW_QUIZ'
+
+export const DELETED_QUIZ = 'DELETED_QUIZ'

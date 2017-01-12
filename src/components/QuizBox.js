@@ -9,6 +9,8 @@ import GradeBox from './GradeBox'
 
 class QuizBox extends React.Component {
   static propTypes = { quiz:         React.PropTypes.object.isRequired
+                     , isMyQuiz:     React.PropTypes.bool.isRequired
+                     , handleDelete: React.PropTypes.func.isRequired
                      , submitAnswer: React.PropTypes.func.isRequired
                      }
 
@@ -19,6 +21,15 @@ class QuizBox extends React.Component {
                  , isDirty:   false
                  , isCorrect: false
                  }
+  }
+
+  onDeleteButtonClick () {
+    console.log(this.props.quiz)
+
+    this.setState({ isLoading: true })
+
+    this.props.handleDelete(this.props.quiz._id)
+      .catch(err => this.setState({ isLoading: false }))
   }
 
   submitAnswer (answer) {
@@ -57,7 +68,7 @@ class QuizBox extends React.Component {
   }
 
   render() {
-    const { quiz } = this.props
+    const { quiz, isMyQuiz } = this.props
 
     return (
       <div className="QuizBox">
@@ -74,6 +85,17 @@ class QuizBox extends React.Component {
           <span className="QuizBox-timestamp">
             {moment(quiz.createdAt).fromNow()}
           </span>
+
+          {isMyQuiz &&
+            <p className="QuizBox-control">
+              <button className="Button"
+                type="button"
+                onClick={this.onDeleteButtonClick.bind(this)}
+              >
+                delete
+              </button>
+            </p>
+          }
         </header>
 
         <div className="QuizBox-body">
