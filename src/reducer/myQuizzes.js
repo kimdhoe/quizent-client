@@ -1,6 +1,7 @@
 import { DELETED_QUIZ
+       , RECEIVE_MY_QUIZ
        , RECEIVE_MY_QUIZZES
-       , RECEIVE_MY_QUIZ } from '../constants'
+       , RECEIVE_MY_LATEST_QUIZZES } from '../constants'
 
 const myQuizzes = (state = [], action) => {
   console.log(state)
@@ -9,6 +10,8 @@ const myQuizzes = (state = [], action) => {
       return action.quizzes
     case RECEIVE_MY_QUIZ:
       return [ action.quiz, ...state ]
+    case RECEIVE_MY_LATEST_QUIZZES:
+      return [ ...action.quizzes, ...state ]
     case DELETED_QUIZ:
       return state.filter(quiz => quiz._id !== action.id)
     default:

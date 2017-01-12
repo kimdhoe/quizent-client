@@ -4,9 +4,10 @@ export const SET_CURRENT_USER          = 'SET_CURRENT_USER'
 export const REMOVE_CURRENT_USER       = 'REMOVE_CURRENT_USER'
 export const REMOVE_ALL_FLASH_MESSAGES = 'REMOVE_ALL_FLASH_MESSAGES'
 
-export const RECEIVE_ME         = 'RECEIVE_ME'
-export const RECEIVE_MY_QUIZZES = 'RECEIVE_MY_QUIZZES'
-export const RECEIVE_MY_QUIZ    = 'RECEIVE_MY_QUIZ'
+export const RECEIVE_ME                = 'RECEIVE_ME'
+export const RECEIVE_MY_QUIZZES        = 'RECEIVE_MY_QUIZZES'
+export const RECEIVE_MY_QUIZ           = 'RECEIVE_MY_QUIZ'
+export const RECEIVE_MY_LATEST_QUIZZES = 'RECEIVE_MY_LATEST_QUIZZES'
 
 export const RECEIVE_USER                = 'RECEIVE_USER'
 export const RECEIVE_USER_QUIZZES        = 'RECEIVE_USER_QUIZZES'

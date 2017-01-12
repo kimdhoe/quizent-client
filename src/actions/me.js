@@ -3,7 +3,8 @@ import axios from 'axios'
 import config from '../config'
 import { RECEIVE_ME
        , RECEIVE_MY_QUIZ
-       , RECEIVE_MY_QUIZZES } from '../constants'
+       , RECEIVE_MY_QUIZZES
+       , RECEIVE_MY_LATEST_QUIZZES } from '../constants'
 import { fetching
        , doneFetching }   from './fetching'
 
@@ -25,6 +26,46 @@ const receiveMyQuiz = quiz => (
   }
 )
 
+export const checkMyLatestQuizzes = ({ lastDate }) => dispatch => {
+  dispatch(fetching())
+
+  return axios.get( config.api + '/api/me/check'
+                  , { params: { lastDate } }
+                  )
+    .then(res => {
+      dispatch(doneFetching())
+      return res.data
+    })
+    .catch(err => {
+      dispatch(doneFetching())
+      console.error(err)
+    })
+}
+
+const receiveMyLatestQuizzes = quizzes => (
+  { type: RECEIVE_MY_LATEST_QUIZZES
+  , quizzes
+  }
+)
+
+export const fetchMyLatestQuizzes = ({ lastDate }) => dispatch => {
+  dispatch(fetching())
+
+  return axios.get( config.api + '/api/me/latest'
+                  , { params: { lastDate } }
+                  )
+    .then(res => {
+      dispatch(receiveMyLatestQuizzes(res.data.quizzes))
+      dispatch(doneFetching())
+
+      return res.data
+    })
+    .catch(err => {
+      dispatch(doneFetching())
+      console.error(err)
+    })
+}
+
 export const fetchMe = () => dispatch => {
   dispatch(fetching())
 
@@ -34,6 +75,8 @@ export const fetchMe = () => dispatch => {
       dispatch(receiveMyQuzzes(res.data.quizzes))
 
       dispatch(doneFetching())
+
+      return res.data
     })
     .catch(err => {
       dispatch(doneFetching())

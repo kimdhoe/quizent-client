@@ -1,38 +1,71 @@
 import React       from 'react'
 import { connect } from 'react-redux'
 
-import Greetings               from './Greetings'
-import UserBox                 from './UserBox'
-import QuizInput               from './QuizInput'
-import Timeline                from './Timeline'
-import { fetchMe, createQuiz } from '../actions/me'
-import { submitAnswer }        from '../actions/submit'
-import { deleteQuiz }          from '../actions/quiz'
+import Greetings        from './Greetings'
+import UserBox          from './UserBox'
+import QuizInput        from './QuizInput'
+import Timeline         from './Timeline'
+import { fetchMe
+       , checkMyLatestQuizzes
+       , fetchMyLatestQuizzes
+       , createQuiz }   from '../actions/me'
+import { submitAnswer } from '../actions/submit'
+import { deleteQuiz }   from '../actions/quiz'
 
 class Home extends React.Component {
-  static propTypes = { isUserLoggedIn: React.PropTypes.bool.isRequired
-                     , isFetching:     React.PropTypes.bool.isRequired
-                     , me:             React.PropTypes.object.isRequired
-                     , myQuizzes:      React.PropTypes.array.isRequired
-                     , username:       React.PropTypes.string.isRequired
-                     , createQuiz:     React.PropTypes.func.isRequired
-                     , installPolling: React.PropTypes.func.isRequired
-                     , handleDelete:   React.PropTypes.func.isRequired
-                     , submitAnswer:   React.PropTypes.func.isRequired
+  static propTypes = { isUserLoggedIn:       React.PropTypes.bool.isRequired
+                     , isFetching:           React.PropTypes.bool.isRequired
+                     , me:                   React.PropTypes.object.isRequired
+                     , myQuizzes:            React.PropTypes.array.isRequired
+                     , username:             React.PropTypes.string.isRequired
+                     , createQuiz:           React.PropTypes.func.isRequired
+                     , handleDelete:         React.PropTypes.func.isRequired
+                     , submitAnswer:         React.PropTypes.func.isRequired
+                     , fetchMe:              React.PropTypes.func.isRequired
+                     , checkMyLatestQuizzes: React.PropTypes.func.isRequired
+                     , fetchMyLatestQuizzes: React.PropTypes.func.isRequired
                      }
 
   constructor () {
     super()
-    this.state = { intervalID: null }
+    this.state = { intervalID:  null
+                 , lastDate:    ''
+                 , nNewQuizzes: 0
+                 }
   }
 
-  componentWillMount () {
-    if (this.props.isUserLoggedIn)
-      this.setState({ intervalID: this.props.installPolling() })
+  componentDidMount () {
+    if (this.props.isUserLoggedIn) {
+      this.props.fetchMe()
+        .then(({ quizzes }) => {
+          this.setState({ lastDate: quizzes[0].createdAt })
+        })
+    }
+
+    const check = () => {
+      this.props.checkMyLatestQuizzes(this.state)
+        .then(({ nNewQuizzes }) => {
+          this.setState({ nNewQuizzes })
+        })
+    }
+
+    const intervalID = setInterval(check, 5000)
+
+    this.setState({ intervalID })
   }
 
   componentWillUnmount () {
     clearInterval(this.state.intervalID)
+  }
+
+  handleUnseenQuizzesClick () {
+    this.props.fetchMyLatestQuizzes(this.state)
+      .then(({ quizzes }) => {
+        this.setState({ nNewQuizzes: 0
+                      , lastDate:    quizzes[0].createdAy
+                      }
+                     )
+      })
   }
 
   render () {
@@ -60,7 +93,9 @@ class Home extends React.Component {
           <Timeline
             username={username}
             quizzes={myQuizzes}
+            nNewQuizzes={this.state.nNewQuizzes}
             handleDelete={handleDelete}
+            handleUnseenQuizzesClick={this.handleUnseenQuizzesClick.bind(this)}
             submitAnswer={submitAnswer}
           />
         </div>
@@ -78,19 +113,13 @@ const mapStateToProps = ({ isUserLoggedIn, isFetching, me, myQuizzes, username }
   }
 )
 
-const pollingInstaller = dispatch => () => {
-    dispatch(fetchMe())
-
-    return setInterval( () => dispatch(fetchMe())
-                      , 20000
-                      )
-  }
-
 const mapDispatchToProps = dispatch => (
-  { createQuiz:     quiz    => dispatch(createQuiz(quiz))
-  , handleDelete:   id      => dispatch(deleteQuiz(id))
-  , submitAnswer:   payload => dispatch(submitAnswer(payload))
-  , installPolling: pollingInstaller(dispatch)
+  { createQuiz:           quiz    => dispatch(createQuiz(quiz))
+  , handleDelete:         id      => dispatch(deleteQuiz(id))
+  , submitAnswer:         payload => dispatch(submitAnswer(payload))
+  , fetchMe:              ()      => dispatch(fetchMe())
+  , checkMyLatestQuizzes: state   => dispatch(checkMyLatestQuizzes(state))
+  , fetchMyLatestQuizzes: state   => dispatch(fetchMyLatestQuizzes(state))
   }
 )
 
