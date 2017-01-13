@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "API='https://quizent-api.herokuapp.com' NODE_ENV='production' webpack && cp src/index.html build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
