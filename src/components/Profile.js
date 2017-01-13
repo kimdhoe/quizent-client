@@ -66,7 +66,7 @@ class Profile extends React.Component {
         })
     }
 
-    const intervalID = setInterval(check, 5000)
+    const intervalID = setInterval(check, 10000)
 
     this.setState({ intervalID })
   }
