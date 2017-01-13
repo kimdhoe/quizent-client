@@ -2,6 +2,7 @@ import React from 'react'
 
 import QuizBox       from './QuizBox'
 import UnseenQuizzes from './UnseenQuizzes'
+import MoreQuizzes   from './MoreQuizzes'
 
 class Timeline extends React.Component {
   static propTypes = { quizzes:                  React.PropTypes.array.isRequired
@@ -9,6 +10,7 @@ class Timeline extends React.Component {
                      , nNewQuizzes:              React.PropTypes.number.isRequired
                      , handleDelete:             React.PropTypes.func.isRequired
                      , handleUnseenQuizzesClick: React.PropTypes.func.isRequired
+                     , handleMoreQuizzesClick:   React.PropTypes.func.isRequired
                      , submitAnswer:             React.PropTypes.func.isRequired
                      }
 
@@ -18,7 +20,8 @@ class Timeline extends React.Component {
           , nNewQuizzes
           , handleDelete
           , submitAnswer
-          , handleUnseenQuizzesClick } = this.props
+          , handleUnseenQuizzesClick
+          , handleMoreQuizzesClick } = this.props
 
     return (
       <div className="Timeline">
@@ -40,6 +43,10 @@ class Timeline extends React.Component {
             />
           )}
         </div>
+
+        <MoreQuizzes
+          handleClick={handleMoreQuizzesClick}
+        />
       </div>
     )
   }

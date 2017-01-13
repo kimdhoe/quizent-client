@@ -6,6 +6,7 @@ import Timeline            from './Timeline'
 import { fetchUser
        , checkLatestUserQuizzes
        , fetchLatestUserQuizzes
+       , fetchMoreUserQuizzes
        }                   from '../actions/user'
 import { requestFollow
        , requestUnfollow } from '../actions/following'
@@ -13,15 +14,16 @@ import { submitAnswer }    from '../actions/submit'
 import { deleteQuiz }      from '../actions/quiz'
 
 class Profile extends React.Component {
-  static propTypes = { isMe:            React.PropTypes.bool.isRequired
-                     , user:            React.PropTypes.object.isRequired
-                     , username:        React.PropTypes.string.isRequired
-                     , userQuizzes:     React.PropTypes.array.isRequired
-                     , fetchUser:       React.PropTypes.func.isRequired
-                     , requestFollow:   React.PropTypes.func.isRequired
-                     , requestUnfollow: React.PropTypes.func.isRequired
-                     , handleDelete:    React.PropTypes.func.isRequired
-                     , submitAnswer:    React.PropTypes.func.isRequired
+  static propTypes = { isMe:                 React.PropTypes.bool.isRequired
+                     , user:                 React.PropTypes.object.isRequired
+                     , username:             React.PropTypes.string.isRequired
+                     , userQuizzes:          React.PropTypes.array.isRequired
+                     , fetchUser:            React.PropTypes.func.isRequired
+                     , requestFollow:        React.PropTypes.func.isRequired
+                     , requestUnfollow:      React.PropTypes.func.isRequired
+                     , handleDelete:         React.PropTypes.func.isRequired
+                     , fetchMoreUserQuizzes: React.PropTypes.func.isRequired
+                     , submitAnswer:         React.PropTypes.func.isRequired
                      }
 
   constructor () {
@@ -29,15 +31,19 @@ class Profile extends React.Component {
     this.state = { intervalID:  null
                  , username:    ''
                  , lastDate:    ''
+                 , firstDate:   ''
                  , nNewQuizzes: 0
                  }
+    this.handleUnseenQuizzesClick = this.handleUnseenQuizzesClick.bind(this)
+    this.handleMoreQuizzesClick = this.handleMoreQuizzesClick.bind(this)
   }
 
   componentDidMount () {
     this.props.fetchUser(this.props.params.username)
       .then(({ user, quizzes }) => {
-        this.setState({ username: user.username
-                      , lastDate: quizzes[0].createdAt
+        this.setState({ username:  user.username
+                      , lastDate:  quizzes[0].createdAt
+                      , firstDate: quizzes[quizzes.length-1].createdAt
                       }
                      )
       })
@@ -59,12 +65,20 @@ class Profile extends React.Component {
   }
 
   handleUnseenQuizzesClick () {
-    this.props.fetchLatestUserQuizzes(this.state)
+    return this.props.fetchLatestUserQuizzes(this.state)
       .then(({ quizzes }) => {
         this.setState({ nNewQuizzes: 0
                       , lastDate:    quizzes[0].createdAt
                       }
                      )
+      })
+  }
+
+  handleMoreQuizzesClick () {
+    return this.props.fetchMoreUserQuizzes(this.state)
+      .then(({ quizzes }) => {
+        if (quizzes.length)
+          this.setState({ firstDate: quizzes[quizzes.length-1].createdAt })
       })
   }
 
@@ -98,7 +112,8 @@ class Profile extends React.Component {
             quizzes={userQuizzes}
             nNewQuizzes={this.state.nNewQuizzes}
             handleDelete={handleDelete}
-            handleUnseenQuizzesClick={this.handleUnseenQuizzesClick.bind(this)}
+            handleUnseenQuizzesClick={this.handleUnseenQuizzesClick}
+            handleMoreQuizzesClick={this.handleMoreQuizzesClick}
             submitAnswer={submitAnswer}
           />
         </div>
@@ -123,6 +138,7 @@ const mapDispatchToProps = dispatch => (
   , fetchUser:              username => dispatch(fetchUser(username))
   , checkLatestUserQuizzes: state => dispatch(checkLatestUserQuizzes(state))
   , fetchLatestUserQuizzes: state => dispatch(fetchLatestUserQuizzes(state))
+  , fetchMoreUserQuizzes:   state => dispatch(fetchMoreUserQuizzes(state))
   }
 )
 

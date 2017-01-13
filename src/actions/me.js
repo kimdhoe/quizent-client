@@ -66,6 +66,24 @@ export const fetchMyLatestQuizzes = ({ lastDate }) => dispatch => {
     })
 }
 
+export const fetchMoreMyQuizzes = ({ firstDate }) => dispatch => {
+  dispatch(fetching())
+
+  return axios.get( config.api + '/api/me/more'
+                  , { params: { firstDate } }
+                  )
+    .then(res => {
+      dispatch(receiveMyQuzzes(res.data.quizzes))
+      dispatch(doneFetching())
+
+      return res.data
+    })
+    .catch(err => {
+      dispatch(doneFetching())
+      console.error(err)
+    })
+}
+
 export const fetchMe = () => dispatch => {
   dispatch(fetching())
 

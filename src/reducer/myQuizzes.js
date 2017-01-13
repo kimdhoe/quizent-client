@@ -7,7 +7,7 @@ const myQuizzes = (state = [], action) => {
   console.log(state)
   switch(action.type) {
     case RECEIVE_MY_QUIZZES:
-      return action.quizzes
+      return [ ...state, ...action.quizzes ]
     case RECEIVE_MY_QUIZ:
       return [ action.quiz, ...state ]
     case RECEIVE_MY_LATEST_QUIZZES:

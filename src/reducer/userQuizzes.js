@@ -5,13 +5,10 @@ import { DELETED_QUIZ
 const userQuizzes = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_USER_QUIZZES:
-      return action.quizzes
+      return [ ...state, ...action.quizzes ]
     case DELETED_QUIZ:
       return state.filter(quiz => quiz._id !== action.id)
     case RECEIVE_LATEST_USER_QUIZZES:
-      console.log('**********')
-      console.log(state)
-      console.log('**********')
       return [ ...action.quizzes, ...state ]
     default:
       return state

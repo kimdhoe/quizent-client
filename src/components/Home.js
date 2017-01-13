@@ -8,6 +8,7 @@ import Timeline         from './Timeline'
 import { fetchMe
        , checkMyLatestQuizzes
        , fetchMyLatestQuizzes
+       , fetchMoreMyQuizzes
        , createQuiz }   from '../actions/me'
 import { submitAnswer } from '../actions/submit'
 import { deleteQuiz }   from '../actions/quiz'
@@ -24,13 +25,15 @@ class Home extends React.Component {
                      , fetchMe:              React.PropTypes.func.isRequired
                      , checkMyLatestQuizzes: React.PropTypes.func.isRequired
                      , fetchMyLatestQuizzes: React.PropTypes.func.isRequired
+                     , fetchMoreMyQuizzes:   React.PropTypes.func.isRequired
                      }
 
   constructor () {
     super()
     this.state = { intervalID:  null
-                 , lastDate:    ''
                  , nNewQuizzes: 0
+                 , lastDate:    ''
+                 , firstDate:   ''
                  }
   }
 
@@ -38,7 +41,10 @@ class Home extends React.Component {
     if (this.props.isUserLoggedIn) {
       this.props.fetchMe()
         .then(({ quizzes }) => {
-          this.setState({ lastDate: quizzes[0].createdAt })
+          this.setState({ lastDate:  quizzes[0].createdAt
+                        , firstDate: quizzes[quizzes.length-1].createdAt
+                        }
+                       )
         })
     }
 
@@ -59,12 +65,20 @@ class Home extends React.Component {
   }
 
   handleUnseenQuizzesClick () {
-    this.props.fetchMyLatestQuizzes(this.state)
+    return this.props.fetchMyLatestQuizzes(this.state)
       .then(({ quizzes }) => {
         this.setState({ nNewQuizzes: 0
-                      , lastDate:    quizzes[0].createdAy
+                      , lastDate:    quizzes[0].createdAt
                       }
                      )
+      })
+  }
+
+  handleMoreQuizzesClick () {
+    return this.props.fetchMoreMyQuizzes(this.state)
+      .then(({ quizzes }) => {
+        if (quizzes.length)
+          this.setState({ firstDate: quizzes[quizzes.length-1].createdAt })
       })
   }
 
@@ -96,6 +110,7 @@ class Home extends React.Component {
             nNewQuizzes={this.state.nNewQuizzes}
             handleDelete={handleDelete}
             handleUnseenQuizzesClick={this.handleUnseenQuizzesClick.bind(this)}
+            handleMoreQuizzesClick={this.handleMoreQuizzesClick.bind(this)}
             submitAnswer={submitAnswer}
           />
         </div>
@@ -120,6 +135,7 @@ const mapDispatchToProps = dispatch => (
   , fetchMe:              ()      => dispatch(fetchMe())
   , checkMyLatestQuizzes: state   => dispatch(checkMyLatestQuizzes(state))
   , fetchMyLatestQuizzes: state   => dispatch(fetchMyLatestQuizzes(state))
+  , fetchMoreMyQuizzes:   state   => dispatch(fetchMoreMyQuizzes(state))
   }
 )
 

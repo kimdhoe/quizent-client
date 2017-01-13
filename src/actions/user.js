@@ -74,3 +74,20 @@ export const checkLatestUserQuizzes = ({ username, lastDate }) => dispatch => {
       console.error(err)
     })
 }
+
+export const fetchMoreUserQuizzes = ({ username, firstDate }) => dispatch => {
+  dispatch(fetching())
+
+  return axios.get( config.api + '/api/users/' + username + '/more'
+                  , { params: { firstDate } }
+                  )
+    .then(res => {
+      dispatch(doneFetching())
+      dispatch(receiveUserQuizzes(res.data.quizzes))
+      return res.data
+    })
+    .catch(err => {
+      dispatch(doneFetching())
+      console.error(err)
+    })
+}
