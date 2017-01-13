@@ -8,10 +8,12 @@ export const RECEIVE_ME                = 'RECEIVE_ME'
 export const RECEIVE_MY_QUIZZES        = 'RECEIVE_MY_QUIZZES'
 export const RECEIVE_MY_QUIZ           = 'RECEIVE_MY_QUIZ'
 export const RECEIVE_MY_LATEST_QUIZZES = 'RECEIVE_MY_LATEST_QUIZZES'
+export const EMPTY_MY_QUIZZES          = 'EMPTY_MY_QUIZZES'
 
 export const RECEIVE_USER                = 'RECEIVE_USER'
 export const RECEIVE_USER_QUIZZES        = 'RECEIVE_USER_QUIZZES'
 export const RECEIVE_LATEST_USER_QUIZZES = 'RECEIVE_LATEST_USER_QUIZZES'
+export const EMPTY_USER_QUIZZES          = 'EMPTY_USER_QUIZZES'
 
 export const FETCHING      = 'FETCHING'
 export const DONE_FETCHING = 'DONE_FETCHING'

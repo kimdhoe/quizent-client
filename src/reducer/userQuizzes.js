@@ -1,6 +1,7 @@
 import { DELETED_QUIZ
        , RECEIVE_USER_QUIZZES
-       , RECEIVE_LATEST_USER_QUIZZES } from '../constants'
+       , RECEIVE_LATEST_USER_QUIZZES
+       , EMPTY_USER_QUIZZES } from '../constants'
 
 const userQuizzes = (state = [], action) => {
   switch (action.type) {
@@ -10,6 +11,8 @@ const userQuizzes = (state = [], action) => {
       return state.filter(quiz => quiz._id !== action.id)
     case RECEIVE_LATEST_USER_QUIZZES:
       return [ ...action.quizzes, ...state ]
+    case EMPTY_USER_QUIZZES:
+      return []
     default:
       return state
   }

@@ -1,12 +1,13 @@
 import axios from 'axios'
 
-import config from '../config'
+import config               from '../config'
 import { RECEIVE_ME
        , RECEIVE_MY_QUIZ
        , RECEIVE_MY_QUIZZES
-       , RECEIVE_MY_LATEST_QUIZZES } from '../constants'
+       , RECEIVE_MY_LATEST_QUIZZES
+       , EMPTY_MY_QUIZZES } from '../constants'
 import { fetching
-       , doneFetching }   from './fetching'
+       , doneFetching }     from './fetching'
 
 const receiveMe = me => (
   { type: RECEIVE_ME
@@ -118,3 +119,7 @@ export const createQuiz = quiz => dispatch => {
     })
 }
 
+
+export const emptyMyQuizzes = () => (
+  { type: EMPTY_MY_QUIZZES }
+)

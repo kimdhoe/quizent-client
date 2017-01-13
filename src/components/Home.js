@@ -9,9 +9,11 @@ import { fetchMe
        , checkMyLatestQuizzes
        , fetchMyLatestQuizzes
        , fetchMoreMyQuizzes
+       , emptyMyQuizzes
        , createQuiz }   from '../actions/me'
 import { submitAnswer } from '../actions/submit'
 import { deleteQuiz }   from '../actions/quiz'
+import { showNewQuiz }  from '../actions/newQuiz'
 
 class Home extends React.Component {
   static propTypes = { isUserLoggedIn:       React.PropTypes.bool.isRequired
@@ -26,6 +28,8 @@ class Home extends React.Component {
                      , checkMyLatestQuizzes: React.PropTypes.func.isRequired
                      , fetchMyLatestQuizzes: React.PropTypes.func.isRequired
                      , fetchMoreMyQuizzes:   React.PropTypes.func.isRequired
+                     , emptyMyQuizzes:       React.PropTypes.func.isRequired
+                     , showNewQuiz:          React.PropTypes.func.isRequired
                      }
 
   constructor () {
@@ -62,6 +66,7 @@ class Home extends React.Component {
 
   componentWillUnmount () {
     clearInterval(this.state.intervalID)
+    this.props.emptyMyQuizzes()
   }
 
   handleUnseenQuizzesClick () {
@@ -72,6 +77,10 @@ class Home extends React.Component {
                       }
                      )
       })
+  }
+
+  onNewQuizClick () {
+    this.props.showNewQuiz()
   }
 
   handleMoreQuizzesClick () {
@@ -100,7 +109,18 @@ class Home extends React.Component {
             toggleFollow={()=>{}}
           />
 
-          <QuizInput createQuiz={createQuiz} />
+
+          <div className="Home-newQuiz">
+            <p>What's in your mind?</p>
+            <button className="Button Button--primary"
+              onClick={this.onNewQuizClick.bind(this)}
+            >
+              [ Post a new quiz! ]
+            </button>
+          </div>
+
+          {/* <QuizInput createQuiz={createQuiz} /> */}
+
         </div>
 
         <div className="Grid-cell size-grande-8of12">
@@ -136,6 +156,8 @@ const mapDispatchToProps = dispatch => (
   , checkMyLatestQuizzes: state   => dispatch(checkMyLatestQuizzes(state))
   , fetchMyLatestQuizzes: state   => dispatch(fetchMyLatestQuizzes(state))
   , fetchMoreMyQuizzes:   state   => dispatch(fetchMoreMyQuizzes(state))
+  , emptyMyQuizzes:       ()      => dispatch(emptyMyQuizzes())
+  , showNewQuiz:          ()      => dispatch(showNewQuiz())
   }
 )
 

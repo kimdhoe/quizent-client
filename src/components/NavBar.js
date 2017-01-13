@@ -29,7 +29,7 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout, showNewQuiz }) =
         </Link>
       </li>
       <li className="NavBar-item">
-        <Link className="NavBar-link" to="/me">
+        <Link className="NavBar-link" to={'/user/' + username}>
           <strong>{username}</strong>
         </Link>
       </li>

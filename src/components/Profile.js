@@ -7,6 +7,7 @@ import { fetchUser
        , checkLatestUserQuizzes
        , fetchLatestUserQuizzes
        , fetchMoreUserQuizzes
+       , emptyUserQuizzes
        }                   from '../actions/user'
 import { requestFollow
        , requestUnfollow } from '../actions/following'
@@ -24,6 +25,7 @@ class Profile extends React.Component {
                      , handleDelete:         React.PropTypes.func.isRequired
                      , fetchMoreUserQuizzes: React.PropTypes.func.isRequired
                      , submitAnswer:         React.PropTypes.func.isRequired
+                     , emptyUserQuizzes:     React.PropTypes.func.isRequired
                      }
 
   constructor () {
@@ -62,6 +64,7 @@ class Profile extends React.Component {
 
   componentWillUnmount () {
     clearInterval(this.state.intervalID)
+    this.props.emptyUserQuizzes()
   }
 
   handleUnseenQuizzesClick () {
@@ -139,6 +142,7 @@ const mapDispatchToProps = dispatch => (
   , checkLatestUserQuizzes: state => dispatch(checkLatestUserQuizzes(state))
   , fetchLatestUserQuizzes: state => dispatch(fetchLatestUserQuizzes(state))
   , fetchMoreUserQuizzes:   state => dispatch(fetchMoreUserQuizzes(state))
+  , emptyUserQuizzes:       () => dispatch(emptyUserQuizzes())
   }
 )
 

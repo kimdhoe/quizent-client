@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-import config                          from '../config'
+import config                 from '../config'
 import { RECEIVE_USER
        , RECEIVE_USER_QUIZZES
-       , RECEIVE_LATEST_USER_QUIZZES } from '../constants'
+       , RECEIVE_LATEST_USER_QUIZZES
+       , EMPTY_USER_QUIZZES } from '../constants'
 import { fetching
-       , doneFetching }                from './fetching'
+       , doneFetching }       from './fetching'
 
 const receiveUser = user => (
   { type: RECEIVE_USER
@@ -91,3 +92,7 @@ export const fetchMoreUserQuizzes = ({ username, firstDate }) => dispatch => {
       console.error(err)
     })
 }
+
+export const emptyUserQuizzes = () => (
+  { type: EMPTY_USER_QUIZZES }
+)
