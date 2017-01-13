@@ -50,18 +50,18 @@ class Home extends React.Component {
                         }
                        )
         })
+
+      const check = () => {
+        this.props.checkMyLatestQuizzes(this.state)
+          .then(({ nNewQuizzes }) => {
+            this.setState({ nNewQuizzes })
+          })
+      }
+
+      const intervalID = setInterval(check, 5000)
+
+      this.setState({ intervalID })
     }
-
-    const check = () => {
-      this.props.checkMyLatestQuizzes(this.state)
-        .then(({ nNewQuizzes }) => {
-          this.setState({ nNewQuizzes })
-        })
-    }
-
-    const intervalID = setInterval(check, 5000)
-
-    this.setState({ intervalID })
   }
 
   componentWillUnmount () {

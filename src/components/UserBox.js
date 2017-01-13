@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 import FollowButton from './FollowButton'
 
-const UserBox = ({ isMe, user, buttonText, toggleFollow }) =>
+const UserBox = ({ isUserLoggedIn, isMe, user, buttonText, toggleFollow }) =>
   <div className="UserBox">
     <header>
       <Link className="UserBox-names" to={`/user/${user.username}`}>
@@ -13,7 +13,7 @@ const UserBox = ({ isMe, user, buttonText, toggleFollow }) =>
     </header>
 
     <div className="UserBox-body">
-      {!isMe &&
+      {isUserLoggedIn && !isMe &&
         <div className="UserBox-follow">
           <FollowButton
             buttonText={buttonText}

@@ -1,4 +1,5 @@
 import React       from 'react'
+import { Link }    from 'react-router'
 import { connect } from 'react-redux'
 
 import UserBox             from './UserBox'
@@ -16,6 +17,7 @@ import { deleteQuiz }      from '../actions/quiz'
 
 class Profile extends React.Component {
   static propTypes = { isMe:                 React.PropTypes.bool.isRequired
+                     , isUserLoggedIn:       React.PropTypes.bool.isRequired
                      , user:                 React.PropTypes.object.isRequired
                      , username:             React.PropTypes.string.isRequired
                      , userQuizzes:          React.PropTypes.array.isRequired
@@ -87,6 +89,7 @@ class Profile extends React.Component {
 
   render () {
     const { isMe
+          , isUserLoggedIn
           , user
           , username
           , userQuizzes
@@ -100,6 +103,7 @@ class Profile extends React.Component {
         <div className="Grid-cell size-grande-4of12">
           <UserBox
             isMe={isMe}
+            isUserLoggedIn={isUserLoggedIn}
             user={user}
             buttonText={user.followed ? "Unfollow" : "Follow"}
             toggleFollow={user.followed
@@ -107,6 +111,13 @@ class Profile extends React.Component {
                             : () => this.props.requestFollow(user._id)
                          }
           />
+
+          {!isUserLoggedIn &&
+            <p>
+              <Link to="/signup">Sign up </Link>
+              now to show your own intereting quizzes!
+            </p>
+          }
         </div>
 
         <div className="Grid-cell size-grande-8of12">
@@ -125,8 +136,9 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = ({ username, user, userQuizzes }) => (
+const mapStateToProps = ({ isUserLoggedIn, username, user, userQuizzes }) => (
   { isMe: username === user.username
+  , isUserLoggedIn
   , user
   , username
   , userQuizzes
