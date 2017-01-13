@@ -74,6 +74,7 @@ $enable-bg-class: true;
  * COMPONENTS
  */
 @import "components/Main";
+@import "components/FlashMessages";
 @import "components/NavBar";
 @import "components/NewQuiz";
 @import "components/Loader";

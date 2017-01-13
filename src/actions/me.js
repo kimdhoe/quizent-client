@@ -101,7 +101,9 @@ export const fetchMe = () => dispatch => {
     .then(res => {
       const { me, quizzes } = res.data
 
-      dispatch(updateMyLastQuizDate(quizzes[0].createdAt))
+      if (quizzes.length)
+        dispatch(updateMyLastQuizDate(quizzes[0].createdAt))
+
       dispatch(receiveMe(me))
       dispatch(receiveMyQuzzes(quizzes))
 

@@ -43,7 +43,9 @@ export const fetchUser = username => dispatch => {
     .then(res => {
       const { user, quizzes } = res.data
 
-      dispatch(updateUserLastQuizDate(quizzes[0].createdAt))
+      if (quizzes.length)
+        dispatch(updateUserLastQuizDate(quizzes[0].createdAt))
+
       dispatch(receiveUser(user))
       dispatch(receiveUserQuizzes(quizzes))
       dispatch(doneFetching())

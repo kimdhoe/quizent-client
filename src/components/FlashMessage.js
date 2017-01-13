@@ -4,7 +4,7 @@ const FlashMessage = ({ id, type, text, removeFlashMessage }) =>
   <div className={`alert alert-${type}`}>
     {text}
     <button
-      className="close"
+      className="close Button Button--primary"
       onClick={() => removeFlashMessage(id) }
     >
       <span>&times;</span>

@@ -49,7 +49,11 @@ class Home extends React.Component {
     if (this.props.isUserLoggedIn) {
       this.props.fetchMe()
         .then(({ quizzes }) => {
-          this.setState({ firstDate: quizzes[quizzes.length-1].createdAt })
+          if (quizzes.length)
+            this.setState({ firstDate: quizzes.length
+                                         ? quizzes[quizzes.length-1].createdAt
+                                         : ''
+                         })
         })
 
       const check = () => {

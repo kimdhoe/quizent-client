@@ -54,7 +54,7 @@ const NavBar = ({ isUserLoggedIn, isFetching, username, logout, showNewQuiz }) =
     <header className="NavBar">
       <nav className="container">
         <h1 className="NavBar-brand">
-          <Link to="/" className="NavBar-brandLink"><span>quizent</span></Link>
+          <Link to="/" className="NavBar-brandLink"><span>quizent (alpha)</span></Link>
         </h1>
 
         <div className="NavBar-loader">

@@ -49,7 +49,9 @@ class Profile extends React.Component {
     this.props.fetchUser(username)
       .then(({ user, quizzes }) => {
         this.setState({ username:  user.username
-                      , firstDate: quizzes[quizzes.length-1].createdAt
+                      , firstDate: quizzes.length
+                                     ? quizzes[quizzes.length-1].createdAt
+                                     : ''
                       }
                      )
       })

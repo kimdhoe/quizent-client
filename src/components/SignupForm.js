@@ -51,7 +51,7 @@ class SignupForm extends React.Component {
           console.log(res)
           this.props.login(res.data.token, res.data.username)
 
-          this.context.router.push('/me')
+          this.context.router.push('/')
 
           this.props.showWelcome(
             { type: 'success'
