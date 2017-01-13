@@ -16,7 +16,7 @@ class LoginForm extends React.Component {
                     , isFetching: false
                     }
     this.onSubmit = this.onSubmit.bind(this)
-    this._onChange = this._onChange.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   // 사용자 정보가 형식에 맞는지 확인하고 로그인 요청을 보냅니다.
@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
   }
 
   // 사용자 정보와 관련된 상태를 업데이트합니다.
-  _onChange (e) {
+  onChange (e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
           label="Username or Email"
           value={identifier}
           error={errors.identifier}
-          onChange={this._onChange}
+          onChange={this.onChange}
         />
 
         <InputField
@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
           label="Password"
           value={password}
           error={errors.password}
-          onChange={this._onChange}
+          onChange={this.onChange}
         />
 
       <div className="form-group">
