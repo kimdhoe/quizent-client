@@ -15,12 +15,12 @@ class LoginForm extends React.Component {
                     , errors:     {}
                     , isFetching: false
                     }
-    this._onSubmit = this._onSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
     this._onChange = this._onChange.bind(this)
   }
 
   // 사용자 정보가 형식에 맞는지 확인하고 로그인 요청을 보냅니다.
-  _onSubmit (e) {
+  onSubmit (e) {
     e.preventDefault()
 
     // Validate login data and set errors state.
@@ -43,7 +43,7 @@ class LoginForm extends React.Component {
     const { identifier, password, errors, isFetching } = this.state
 
     return (
-      <form onSubmit={this._onSubmit}>
+      <form onSubmit={this.onSubmit}>
         <h2>Login</h2>
 
         {errors.form &&
