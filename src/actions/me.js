@@ -27,7 +27,13 @@ const receiveMyQuiz = quiz => (
   }
 )
 
-export const checkMyLatestQuizzes = ({ lastDate }) => dispatch => {
+const updateMyLastQuizDate = lastDate => (
+  { type: 'UPDATE_MY_LAST_QUIZ_DATE'
+  , lastDate
+  }
+)
+
+export const checkMyLatestQuizzes = (lastDate) => dispatch => {
   dispatch(fetching())
 
   return axios.get( config.api + '/api/me/check'
@@ -49,14 +55,17 @@ const receiveMyLatestQuizzes = quizzes => (
   }
 )
 
-export const fetchMyLatestQuizzes = ({ lastDate }) => dispatch => {
+export const fetchMyLatestQuizzes = lastDate => dispatch => {
   dispatch(fetching())
 
   return axios.get( config.api + '/api/me/latest'
                   , { params: { lastDate } }
                   )
     .then(res => {
-      dispatch(receiveMyLatestQuizzes(res.data.quizzes))
+      const { quizzes } = res.data
+
+      dispatch(updateMyLastQuizDate(quizzes[0].createdAt))
+      dispatch(receiveMyLatestQuizzes(quizzes))
       dispatch(doneFetching())
 
       return res.data
@@ -90,8 +99,11 @@ export const fetchMe = () => dispatch => {
 
   return axios.get(config.api + '/api/me')
     .then(res => {
-      dispatch(receiveMe(res.data.me))
-      dispatch(receiveMyQuzzes(res.data.quizzes))
+      const { me, quizzes } = res.data
+
+      dispatch(updateMyLastQuizDate(quizzes[0].createdAt))
+      dispatch(receiveMe(me))
+      dispatch(receiveMyQuzzes(quizzes))
 
       dispatch(doneFetching())
 
@@ -109,6 +121,7 @@ export const createQuiz = quiz => dispatch => {
   return axios
     .post(config.api + '/api/quizzes', quiz)
     .then(res => {
+      dispatch(updateMyLastQuizDate(res.data.createdAt))
       dispatch(receiveMyQuiz(res.data))
       dispatch(doneFetching())
     })

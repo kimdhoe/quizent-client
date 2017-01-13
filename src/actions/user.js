@@ -20,13 +20,32 @@ const receiveUserQuizzes = quizzes => (
   }
 )
 
+const receiveLatestUserQuizzes = quizzes => (
+  { type: RECEIVE_LATEST_USER_QUIZZES
+  , quizzes
+  }
+)
+
+const updateUserLastQuizDate = lastDate => (
+  { type: 'UPDATE_USER_LAST_QUIZ_DATE'
+  , lastDate
+  }
+)
+
+export const emptyUserQuizzes = () => (
+  { type: EMPTY_USER_QUIZZES }
+)
+
 export const fetchUser = username => dispatch => {
   dispatch(fetching())
 
   return axios.get(config.api + '/api/users/' + username)
     .then(res => {
-      dispatch(receiveUser(res.data.user))
-      dispatch(receiveUserQuizzes(res.data.quizzes))
+      const { user, quizzes } = res.data
+
+      dispatch(updateUserLastQuizDate(quizzes[0].createdAt))
+      dispatch(receiveUser(user))
+      dispatch(receiveUserQuizzes(quizzes))
       dispatch(doneFetching())
       return res.data
     })
@@ -36,12 +55,6 @@ export const fetchUser = username => dispatch => {
     })
 }
 
-const receiveLatestUserQuizzes = quizzes => (
-  { type: RECEIVE_LATEST_USER_QUIZZES
-  , quizzes
-  }
-)
-
 export const fetchLatestUserQuizzes = ({ username, lastDate }) => dispatch => {
   dispatch(fetching())
 
@@ -49,7 +62,10 @@ export const fetchLatestUserQuizzes = ({ username, lastDate }) => dispatch => {
                   , { params: { lastDate } }
                   )
     .then(res => {
-      dispatch(receiveLatestUserQuizzes(res.data.quizzes))
+      const { quizzes } = res.data
+
+      dispatch(updateUserLastQuizDate(quizzes[0].createdAt))
+      dispatch(receiveLatestUserQuizzes(quizzes))
       dispatch(doneFetching())
 
       return res.data
@@ -92,7 +108,3 @@ export const fetchMoreUserQuizzes = ({ username, firstDate }) => dispatch => {
       console.error(err)
     })
 }
-
-export const emptyUserQuizzes = () => (
-  { type: EMPTY_USER_QUIZZES }
-)

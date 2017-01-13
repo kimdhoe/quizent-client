@@ -11,6 +11,8 @@ import user              from './user'
 import userQuizzes       from './userQuizzes'
 import shouldShowNewQuiz from './shouldShowNewQuiz'
 import newQuiz           from './newQuiz'
+import myLastQuizDate    from './myLastQuizDate'
+import userLastQuizDate  from './userLastQuizDate'
 
 const reducer = combineReducers({ flashMessages
                                 , username
@@ -23,6 +25,8 @@ const reducer = combineReducers({ flashMessages
                                 , userQuizzes
                                 , shouldShowNewQuiz
                                 , newQuiz
+                                , myLastQuizDate
+                                , userLastQuizDate
                                 }
                                )
 

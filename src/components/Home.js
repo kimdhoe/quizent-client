@@ -16,10 +16,12 @@ import { deleteQuiz }   from '../actions/quiz'
 import { showNewQuiz }  from '../actions/newQuiz'
 
 class Home extends React.Component {
+  static contextTypes = { router: React.PropTypes.object.isRequired }
   static propTypes = { isUserLoggedIn:       React.PropTypes.bool.isRequired
                      , isFetching:           React.PropTypes.bool.isRequired
                      , me:                   React.PropTypes.object.isRequired
                      , myQuizzes:            React.PropTypes.array.isRequired
+                     , lastDate:             React.PropTypes.string.isRequired
                      , username:             React.PropTypes.string.isRequired
                      , createQuiz:           React.PropTypes.func.isRequired
                      , handleDelete:         React.PropTypes.func.isRequired
@@ -36,23 +38,22 @@ class Home extends React.Component {
     super()
     this.state = { intervalID:  null
                  , nNewQuizzes: 0
-                 , lastDate:    ''
                  , firstDate:   ''
                  }
   }
 
   componentDidMount () {
+    if (!this.props.isUserLoggedIn)
+      this.context.router.push('/greetings')
+
     if (this.props.isUserLoggedIn) {
       this.props.fetchMe()
         .then(({ quizzes }) => {
-          this.setState({ lastDate:  quizzes[0].createdAt
-                        , firstDate: quizzes[quizzes.length-1].createdAt
-                        }
-                       )
+          this.setState({ firstDate: quizzes[quizzes.length-1].createdAt })
         })
 
       const check = () => {
-        this.props.checkMyLatestQuizzes(this.state)
+        this.props.checkMyLatestQuizzes(this.props.lastDate)
           .then(({ nNewQuizzes }) => {
             this.setState({ nNewQuizzes })
           })
@@ -69,13 +70,15 @@ class Home extends React.Component {
     this.props.emptyMyQuizzes()
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (!nextProps.isUserLoggedIn)
+      this.context.router.push('/greetings')
+  }
+
   handleUnseenQuizzesClick () {
-    return this.props.fetchMyLatestQuizzes(this.state)
+    return this.props.fetchMyLatestQuizzes(this.props.lastDate)
       .then(({ quizzes }) => {
-        this.setState({ nNewQuizzes: 0
-                      , lastDate:    quizzes[0].createdAt
-                      }
-                     )
+        this.setState({ nNewQuizzes: 0 })
       })
   }
 
@@ -92,11 +95,8 @@ class Home extends React.Component {
   }
 
   render () {
-    const { me, myQuizzes, isUserLoggedIn, isFetching
-          , createQuiz, handleDelete, submitAnswer, username } = this.props
-
-    if (!isUserLoggedIn)
-      return <Greetings />
+    const { me, myQuizzes, isFetching, createQuiz
+          , handleDelete, submitAnswer, username } = this.props
 
     return (
       <div className="Grid">
@@ -139,25 +139,32 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = ({ isUserLoggedIn, isFetching, me, myQuizzes, username }) => (
+const mapStateToProps = ({ isUserLoggedIn
+                         , isFetching
+                         , me
+                         , myQuizzes
+                         , myLastQuizDate
+                         , username
+                        }) => (
   { isUserLoggedIn
   , isFetching
   , me
   , myQuizzes
+  , lastDate: myLastQuizDate
   , username
   }
 )
 
 const mapDispatchToProps = dispatch => (
-  { createQuiz:           quiz    => dispatch(createQuiz(quiz))
-  , handleDelete:         id      => dispatch(deleteQuiz(id))
-  , submitAnswer:         payload => dispatch(submitAnswer(payload))
-  , fetchMe:              ()      => dispatch(fetchMe())
-  , checkMyLatestQuizzes: state   => dispatch(checkMyLatestQuizzes(state))
-  , fetchMyLatestQuizzes: state   => dispatch(fetchMyLatestQuizzes(state))
-  , fetchMoreMyQuizzes:   state   => dispatch(fetchMoreMyQuizzes(state))
-  , emptyMyQuizzes:       ()      => dispatch(emptyMyQuizzes())
-  , showNewQuiz:          ()      => dispatch(showNewQuiz())
+  { createQuiz:           quiz     => dispatch(createQuiz(quiz))
+  , handleDelete:         id       => dispatch(deleteQuiz(id))
+  , submitAnswer:         payload  => dispatch(submitAnswer(payload))
+  , fetchMe:              ()       => dispatch(fetchMe())
+  , checkMyLatestQuizzes: lastDate => dispatch(checkMyLatestQuizzes(lastDate))
+  , fetchMyLatestQuizzes: lastDate => dispatch(fetchMyLatestQuizzes(lastDate))
+  , fetchMoreMyQuizzes:   state    => dispatch(fetchMoreMyQuizzes(state))
+  , emptyMyQuizzes:       ()       => dispatch(emptyMyQuizzes())
+  , showNewQuiz:          ()       => dispatch(showNewQuiz())
   }
 )
 

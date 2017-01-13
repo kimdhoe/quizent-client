@@ -4,6 +4,7 @@ import { Route
 
 import App               from './components/App'
 import Home              from './components/Home'
+import Greetings         from './components/Greetings'
 import SignupPage        from './components/SignupPage'
 import LoginPage         from './components/LoginPage'
 import Me                from './components/Me'
@@ -15,6 +16,7 @@ import requireGuest      from './utils/requireGuest'
 const routes =
   <Route path="/" component={App}>
     <IndexRoute              component={Home} />
+    <Route path="greetings"  component={requireGuest(Greetings)} />
     <Route path="signup"     component={requireGuest(SignupPage)} />
     <Route path="login"      component={requireGuest(LoginPage)} />
 

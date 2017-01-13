@@ -20,6 +20,7 @@ class Profile extends React.Component {
                      , isUserLoggedIn:       React.PropTypes.bool.isRequired
                      , user:                 React.PropTypes.object.isRequired
                      , username:             React.PropTypes.string.isRequired
+                     , userLastQuizDate:     React.PropTypes.string.isRequired
                      , userQuizzes:          React.PropTypes.array.isRequired
                      , fetchUser:            React.PropTypes.func.isRequired
                      , requestFollow:        React.PropTypes.func.isRequired
@@ -34,26 +35,30 @@ class Profile extends React.Component {
     super()
     this.state = { intervalID:  null
                  , username:    ''
-                 , lastDate:    ''
                  , firstDate:   ''
                  , nNewQuizzes: 0
                  }
+
     this.handleUnseenQuizzesClick = this.handleUnseenQuizzesClick.bind(this)
-    this.handleMoreQuizzesClick = this.handleMoreQuizzesClick.bind(this)
+    this.handleMoreQuizzesClick   = this.handleMoreQuizzesClick.bind(this)
   }
 
   componentDidMount () {
-    this.props.fetchUser(this.props.params.username)
+    const { username } = this.props.params
+
+    this.props.fetchUser(username)
       .then(({ user, quizzes }) => {
         this.setState({ username:  user.username
-                      , lastDate:  quizzes[0].createdAt
                       , firstDate: quizzes[quizzes.length-1].createdAt
                       }
                      )
       })
 
     const check = () => {
-      this.props.checkLatestUserQuizzes(this.state)
+      this.props.checkLatestUserQuizzes({ username: this.state.username
+                                        , lastDate: this.props.userLastQuizDate
+                                        }
+                                       )
         .then(({ nNewQuizzes }) => {
           this.setState({ nNewQuizzes })
         })
@@ -70,10 +75,13 @@ class Profile extends React.Component {
   }
 
   handleUnseenQuizzesClick () {
-    return this.props.fetchLatestUserQuizzes(this.state)
+    return this.props.fetchLatestUserQuizzes(
+             { username: this.state.username
+             , lastDate: this.props.userLastQuizDate
+             }
+           )
       .then(({ quizzes }) => {
         this.setState({ nNewQuizzes: 0
-                      , lastDate:    quizzes[0].createdAt
                       }
                      )
       })
@@ -136,11 +144,17 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = ({ isUserLoggedIn, username, user, userQuizzes }) => (
+const mapStateToProps = ({ isUserLoggedIn
+                         , username
+                         , userLastQuizDate
+                         , user
+                         , userQuizzes
+                        }) => (
   { isMe: username === user.username
   , isUserLoggedIn
   , user
   , username
+  , userLastQuizDate
   , userQuizzes
   }
 )

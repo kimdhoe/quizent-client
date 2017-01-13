@@ -5,8 +5,7 @@ import { DELETED_QUIZ
        , EMPTY_MY_QUIZZES } from '../constants'
 
 const myQuizzes = (state = [], action) => {
-  console.log(state)
-  switch(action.type) {
+  switch (action.type) {
     case RECEIVE_MY_QUIZZES:
       return [ ...state, ...action.quizzes ]
     case RECEIVE_MY_QUIZ:
